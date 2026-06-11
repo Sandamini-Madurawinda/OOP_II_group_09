@@ -1,8 +1,8 @@
-package service;
+package g9.pulse.pulse.service;
 
 
 
-import dto.RegistrationDto;
+import g9.pulse.pulse.dto.RegistrationDto;
 import model.User;
 import repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

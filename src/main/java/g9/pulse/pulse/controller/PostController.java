@@ -1,4 +1,4 @@
-package controller;
+package g9.pulse.pulse.controller;
 
 
 
