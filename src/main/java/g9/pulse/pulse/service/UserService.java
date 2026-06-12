@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
             if(repository.existsByEmail(dto.getEmail()))
             {
                 throw new RuntimeException("Email already exists");
+
             }
 
 
