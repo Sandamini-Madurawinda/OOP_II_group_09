@@ -13,6 +13,7 @@ import java.util.List;
 public class SearchController {
     private final UserRepository userRepository;
 
+
     public SearchController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
