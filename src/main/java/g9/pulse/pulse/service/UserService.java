@@ -35,6 +35,23 @@ import org.springframework.stereotype.Service;
             repository.save(user);
 
         }
+        public User getByEmail(String email) {
+
+            return repository.findByEmail(email)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+        }
+
+        public void updateProfile(String email,
+                                  String firstName,
+                                  String lastName) {
+
+            User user = getByEmail(email);
+
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+
+            repository.save(user);
+        }
 
     }
 
