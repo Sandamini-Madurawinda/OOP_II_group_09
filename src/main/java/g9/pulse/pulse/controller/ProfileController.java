@@ -48,12 +48,11 @@ public class ProfileController {
     @PostMapping("/edit")
     public String updateProfile(@RequestParam String firstName,
                                 @RequestParam String lastName,
-                                @RequestParam String bio,
                                 Principal principal) {
 
         String email = principal.getName();
 
-        userService.updateProfile(email, firstName, lastName, bio);
+        userService.updateProfile(email, firstName, lastName);
 
         return "redirect:/profile";
     }
