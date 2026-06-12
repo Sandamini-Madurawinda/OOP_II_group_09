@@ -17,6 +17,13 @@ import org.springframework.stereotype.Service;
         private PasswordEncoder passwordEncoder;
 
         public void register(RegistrationDto dto){
+
+            if(repository.existsByEmail(dto.getEmail()))
+            {
+                throw new RuntimeException("Email already exists");
+            }
+
+
             User user = new User();
 
 
