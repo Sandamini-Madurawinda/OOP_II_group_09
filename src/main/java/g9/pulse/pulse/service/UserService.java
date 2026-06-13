@@ -24,6 +24,15 @@ import org.springframework.stereotype.Service;
 
             }
 
+            if(!dto.getPassword()
+                    .equals(dto.getConfirmPassword()))
+            {
+                throw new RuntimeException(
+                        "Passwords do not match"
+                );
+            }
+
+
 
             User user = new User();
 
