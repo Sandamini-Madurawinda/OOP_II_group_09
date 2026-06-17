@@ -15,3 +15,5 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
 
     boolean existsByUserAndPost(User user, Post post);
 }
+
+//test
