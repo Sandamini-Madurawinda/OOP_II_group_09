@@ -1,4 +1,5 @@
 package g9.pulse.pulse.controller;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,66 +10,76 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import g9.pulse.pulse.service.UserService;
 import g9.pulse.pulse.dto.RegistrationDto;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-    public class AuthController {
-        @Autowired
-        UserService service;
+public class AuthController {
 
-        @GetMapping("/")
-        public String landing(){
+    @Autowired
+    UserService service;
 
-            return "login";
+    @GetMapping("/")
+    public String landing(){
+        return "login";
+    }
 
-        }
-        @GetMapping("/login")
-        public String login(){
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 
-            return "login";
+    @GetMapping("/register")
+    public String registerPage(Model model){
+        model.addAttribute("register", new RegistrationDto());
+        return "register";
+    }
 
-        }
-        @GetMapping("/register")
-        public String registerPage(Model model){
+    @PostMapping("/register")
+    public String register(
+            @Valid @ModelAttribute("register") RegistrationDto dto,
+            BindingResult result, // <-- Added the missing comma here
+            Model model,
+            RedirectAttributes redirectAttributes){
 
-            model.addAttribute(
-                    "register",
-                    new RegistrationDto()
-            );
-
+        if(result.hasErrors()) {
             return "register";
-
         }
 
-        @PostMapping("/register")
-        public String register(
-                @Valid @ModelAttribute("register")
-                RegistrationDto dto,
-                BindingResult result){
-
-
-            if(result.hasErrors())
-            {
-                return "register";
-            }
-
+        try {
 
             service.register(dto);
 
 
+            redirectAttributes.addFlashAttribute("success", "Successfully registered! Please log in.");
             return "redirect:/login";
 
+        } catch (Exception e) {
+
+            model.addAttribute("error", e.getMessage());
+            return "register";
         }
+    }
 
+    @GetMapping("/home")
+    public String home(){
+        return "home";
+    }
 
-
-        @GetMapping("/home")
-        public String home(){
-
-            return "home";
-
-        }
-
+    @GetMapping("/profile")
+    public String profilePage() {
+        return "profile";
 
     }
 
+    @GetMapping("/edit-profile")
+    public String editProfilePage() {
+        return "edit-profile";
+
+    }
+
+    @GetMapping("/search")
+    public String searchPage() {
+        return "search";
+
+    }
+}
