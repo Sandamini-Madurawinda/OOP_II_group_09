@@ -27,7 +27,7 @@ public class SecurityConfig {
                                 "/",
                                 "/login",
                                 "/register",
-                                "/css/**"
+                                "/style.css/**"
                         ).permitAll()
 
 
