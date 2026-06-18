@@ -65,21 +65,11 @@ public class AuthController {
         return "home";
     }
 
-    @GetMapping("/profile")
-    public String profilePage() {
-        return "profile";
-
-    }
-
     @GetMapping("/edit-profile")
     public String editProfilePage() {
         return "edit-profile";
 
     }
 
-    @GetMapping("/search")
-    public String searchPage() {
-        return "search";
 
-    }
 }
