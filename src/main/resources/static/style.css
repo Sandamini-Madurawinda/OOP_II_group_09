@@ -1,4 +1,4 @@
-/* Reset basic styles for consistency */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,16 +6,17 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Center the container vertically and horizontally on the page */
+
 body {
     background-color: #f4f7f6;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    padding: 20px;
 }
 
-/* Card container for the login form */
+
 .container {
     background-color: #ffffff;
     padding: 40px;
@@ -25,14 +26,25 @@ body {
     max-width: 400px;
 }
 
-/* Heading style */
+
 h2 {
     text-align: center;
     margin-bottom: 24px;
     color: #333333;
 }
 
-/* Style for the Thymeleaf error message */
+.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 12px;
+    border-radius: 4px;
+    border-left: 4px solid #4caf50;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+
 .error {
     background-color: #ffebee;
     color: #c62828;
@@ -44,13 +56,21 @@ h2 {
     text-align: center;
 }
 
-/* Form layout structure */
+.error-field {
+    color: #e53935;
+    font-size: 0.8rem;
+    margin-top: -15px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+
 form {
     display: flex;
     flex-direction: column;
 }
 
-/* Label styling */
+
 label {
     margin-bottom: 6px;
     font-weight: 600;
@@ -58,8 +78,9 @@ label {
     font-size: 0.9rem;
 }
 
-/* Input fields styling */
+
 input[type="text"],
+input[type="email"],
 input[type="password"] {
     padding: 12px;
     margin-bottom: 20px;
@@ -70,14 +91,15 @@ input[type="password"] {
     width: 100%;
 }
 
-/* Highlight input on focus */
+
 input[type="text"]:focus,
+input[type="email"]:focus,
 input[type="password"]:focus {
     border-color: #4a90e2;
     outline: none;
 }
 
-/* Submit button styling */
+
 button[type="submit"] {
     background-color: #4a90e2;
     color: white;
@@ -92,12 +114,12 @@ button[type="submit"] {
     margin-bottom: 20px;
 }
 
-/* Button hover effect */
+
 button[type="submit"]:hover {
     background-color: #357abd;
 }
 
-/* Registration link styling */
+
 a {
     display: block;
     text-align: center;
