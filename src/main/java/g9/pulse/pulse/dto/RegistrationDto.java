@@ -30,7 +30,6 @@ import jakarta.validation.constraints.NotBlank;
             this.firstName = firstName;
         }
 
-
         public String getLastName() {
             return lastName;
         }
