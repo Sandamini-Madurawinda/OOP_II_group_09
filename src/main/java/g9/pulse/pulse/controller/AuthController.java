@@ -37,7 +37,7 @@ public class AuthController {
     @PostMapping("/register")
     public String register(
             @Valid @ModelAttribute("register") RegistrationDto dto,
-            BindingResult result, // <-- Added the missing comma here
+            BindingResult result,
             Model model,
             RedirectAttributes redirectAttributes){
 
