@@ -14,11 +14,15 @@
 <div class="container">
     <h2>Login</h2>
 
+    <p class="success"
+       th:if="${success}"
+       th:text="${success}">
+    </p>
+
     <p class="error"
        th:if="${param.error}">
 
         Invalid email or password
-
     </p>
 
     <form action="/login" method="post">
