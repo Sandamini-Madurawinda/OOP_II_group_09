@@ -1,8 +1,8 @@
 package g9.pulse.pulse.service;
 
 import g9.pulse.pulse.entity.Like;
-import g9.pulse.pulse.entity.Post;
-import g9.pulse.pulse.entity.User;
+import g9.pulse.pulse.model.Post;
+import g9.pulse.pulse.model.User;
 import g9.pulse.pulse.repository.LikeRepository;
 import g9.pulse.pulse.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
