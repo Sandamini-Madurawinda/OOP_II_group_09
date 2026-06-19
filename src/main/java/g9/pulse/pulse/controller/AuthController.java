@@ -49,7 +49,6 @@ public class AuthController {
 
             service.register(dto);
 
-
             redirectAttributes.addFlashAttribute("success", "Successfully registered! Please log in.");
             return "redirect:/login";
 
