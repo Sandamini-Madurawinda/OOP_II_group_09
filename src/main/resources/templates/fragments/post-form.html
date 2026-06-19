@@ -1,28 +1,26 @@
 <div xmlns:th="http://www.thymeleaf.org">
-    <div th:fragment="create-post-card" class="bg-white rounded-xl shadow-sm p-4 border border-gray-200">
-        <form th:action="@{/posts/create}" th:object="${postForm}" method="POST" class="space-y-3">
+    <div th:fragment="create-post-card" class="post-card-container">
+        <form th:action="@{/posts/create}" th:object="${postForm}" method="POST" class="post-form">
 
-            <div class="flex items-start space-x-3">
-                <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
-                    U
+            <div class="form-body-wrapper">
+                <div class="user-avatar-placeholder">
+                    <span th:text="${#strings.substring(postForm != null ? '__' : 'U', 0, 1)}">U</span>
                 </div>
-                <div class="flex-1">
+                <div class="input-area-wrapper">
                     <textarea
-                            name="content"
+                            th:field="*{content}"
                             rows="3"
-                            class="w-full border-none focus:ring-0 resize-none text-gray-800 placeholder-gray-400 text-sm focus:outline-none"
+                            class="post-textarea"
                             placeholder="What's on your mind?..."
                             required></textarea>
                 </div>
             </div>
 
-            <hr class="border-gray-100">
+            <hr class="divider-line">
 
-            <div class="flex justify-between items-center pt-1">
-                <span class="text-xs text-gray-400">Text only</span>
-                <button
-                        type="submit"
-                        class="bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm px-4 py-1.5 rounded-full transition duration-150 shadow-sm">
+            <div class="form-footer-wrapper">
+                <span class="format-indicator">Text only</span>
+                <button type="submit" class="submit-post-btn">
                     Post
                 </button>
             </div>
