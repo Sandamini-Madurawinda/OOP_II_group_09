@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Register</title>
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+
+
+<body>
+<div class="container">
+
+    <h2>Create Account</h2>
+
+    <p class="success"
+       th:if="${success}"
+       th:text="${success}">
+    </p>
+
+    <p class="error"
+       th:if="${error}"
+       th:text="${error}">
+    </p>
+
+
+    <form th:action="@{/register}" th:object="${register}" method="post">
+
+        <label>First Name</label>
+        <input type="text" th:field="*{firstName}" placeholder="Enter first name">
+
+        <p class="error"
+           th:if="${#fields.hasErrors('firstName')}"
+           th:errors="*{firstName}">
+        </p>
+
+
+        <label>Last Name</label>
+        <input type="text" th:field="*{lastName}" placeholder="Enter last name">
+
+        <p class="error"
+           th:if="${#fields.hasErrors('lastName')}"
+           th:errors="*{lastName}">
+        </p>
+
+
+        <label>Email</label>
+        <input type="email" th:field="*{email}" placeholder="Enter email">
+
+        <p class="error"
+           th:if="${#fields.hasErrors('email')}"
+           th:errors="*{email}">
+        </p>
+
+        <label>Password</label>
+        <input type="password" th:field="*{password}" placeholder="Enter password">
+
+        <p class="error"
+           th:if="${#fields.hasErrors('password')}"
+           th:errors="*{password}">
+        </p>
+
+        <label>Confirm Password</label>
+        <input type="password" th:field="*{confirmPassword}" placeholder="Confirm password">
+
+
+        <button type="submit">Register</button>
+
+    </form>
+
+    <a href="/login">Already have an account? Login</a>
+
+</div>
+</body>
+</html>
