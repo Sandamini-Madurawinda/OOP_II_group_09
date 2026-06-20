@@ -1,4 +1,6 @@
 package g9.pulse.pulse.entity;
+import g9.pulse.pulse.model.User;
+import g9.pulse.pulse.model.Post;
 
 import jakarta.persistence.*;
 

@@ -1,7 +1,5 @@
 package g9.pulse.pulse.controller;
 
-
-
 import g9.pulse.pulse.model.Post;
 import g9.pulse.pulse.repository.PostRepository;
 import org.springframework.stereotype.Controller;
@@ -12,7 +10,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/posts")
+@RequestMapping("/posts") // Groups everything clearly under /posts
 public class PostController {
 
     private final PostRepository postRepository;
@@ -22,33 +20,31 @@ public class PostController {
         this.postRepository = postRepository;
     }
 
-    // 1. HTTP GET Mapping: Displays the home feed page populated with database rows
-    @GetMapping("/home")
+    // Displays the timeline home feed at http://localhost:8080/posts/feed
+    @GetMapping("/feed")
     public String showHomeFeed(Model model) {
         List<Post> posts = postRepository.findAllByOrderByCreatedAtDesc();
 
-        // Inject variables that your Thymeleaf template layout expects to find
         model.addAttribute("posts", posts);
-        model.addAttribute("postForm", new Post());
+        model.addAttribute("postForm", new Post()); // Fixes the missing variable crash locally
 
-        return "home"; // Resolves strictly to home.html
+        return "home"; // Still points safely to your home.html template
     }
 
-    // 2. HTTP POST Mapping: Handles form submission actions from post-form.html
+    // Handles form submission actions from your template card fragment
     @PostMapping("/create")
     public String handleCreatePost(@Valid @ModelAttribute("postForm") Post post,
                                    BindingResult result, Model model) {
         if (result.hasErrors()) {
-            // Re-fetch posts to display errors gracefully on the same screen
             model.addAttribute("posts", postRepository.findAllByOrderByCreatedAtDesc());
             return "home";
         }
 
-        // Mocking user session data until Spring Security integration is configured
+        // Session identity mocks
         post.setAuthorFirstName("Nadara");
         post.setAuthorLastName("Jayasinghe");
 
         postRepository.save(post);
-        return "redirect:/posts/home"; // Refresh page to display the new post card
+        return "redirect:/posts/feed"; // Redirects smoothly back to your active timeline view
     }
 }
