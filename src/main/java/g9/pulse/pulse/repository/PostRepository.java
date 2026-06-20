@@ -10,4 +10,9 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Long> {
     // Custom query method to pull all posts ordered by timestamp (newest first)
     List<Post> findAllByOrderByCreatedAtDesc();
+
+    List<Post> findByContentContainingIgnoreCase(String content);
+
+    long countByAuthorFirstNameAndAuthorLastName(String firstName, String lastName);
+
 }

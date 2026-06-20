@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name="users")
 
@@ -27,6 +29,17 @@ public class User {
 
     @NotBlank
     private String password;
+
+    private String bio;
+
+    @Column(nullable = false, updatable = false)
+    private java.time.LocalDate joinDate;
+
+
+    @PrePersist
+    protected void onRegister() {
+        this.joinDate = java.time.LocalDate.now();
+    }
 
 
     public Long getId() {
@@ -63,5 +76,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public LocalDate getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(LocalDate joinDate) {
+        this.joinDate = joinDate;
     }
 }

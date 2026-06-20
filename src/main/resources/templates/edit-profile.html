@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Edit Profile</title>
 </head>
 <body>
 
 <h2>Edit Profile</h2>
 
-<form action="/profile/edit" method="post">
+<form th:action="@{/profile/edit}" method="post">
 
     First Name:
     <input type="text" name="firstName" th:value="${user.firstName}">
@@ -15,6 +16,9 @@
 
     Last Name:
     <input type="text" name="lastName" th:value="${user.lastName}">
+    <br><br>
+    Bio:
+    <textarea name="bio" th:text="${user.bio}"></textarea>
     <br><br>
 
 

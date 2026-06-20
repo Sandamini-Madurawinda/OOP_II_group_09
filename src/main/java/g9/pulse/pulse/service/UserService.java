@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-    @Service
+import java.util.List;
+
+@Service
     public class UserService {
 
         @Autowired
@@ -60,15 +62,22 @@ import org.springframework.stereotype.Service;
 
         public void updateProfile(String email,
                                   String firstName,
-                                  String lastName) {
+                                  String lastName,String bio) {
 
             User user = getByEmail(email);
 
             user.setFirstName(firstName);
             user.setLastName(lastName);
+            user.setBio(bio);
 
             repository.save(user);
         }
 
+        public List<User> searchUsersByName(String keyword) {
+            if (keyword == null || keyword.isBlank()) {
+                return List.of();
+            }
+            return repository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(keyword, keyword);
+        }
     }
 
