@@ -1,7 +1,6 @@
 <div xmlns:th="http://www.thymeleaf.org">
     <div th:fragment="create-post-card" class="post-card-container">
-        <form th:action="@{/posts/create}" th:object="${postForm}" method="POST" class="post-form">
-
+        <form th:action="@{/posts/create}" th:object="${postForm}" method="POST">
             <div class="form-body-wrapper">
                 <div class="user-avatar-placeholder">
                     <span th:text="${#strings.substring(postForm != null ? '__' : 'U', 0, 1)}">U</span>
