@@ -64,6 +64,7 @@ public class AuthController {
         return "home";
     }
 
+
     @GetMapping("/edit-profile")
     public String editProfilePage() {
         return "edit-profile";
