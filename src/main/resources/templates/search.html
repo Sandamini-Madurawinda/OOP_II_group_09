@@ -5,11 +5,12 @@
     <title>Search Users</title>
 </head>
 <body>
-<form action="/search" method="get">
+<form th:action="@{/search}" method="get">
 
     <input type="text"
            name="keyword"
-           placeholder="Enter first name">
+           th:value="${keyword}"
+           placeholder="Search users or posts...">
 
     <button type="submit">
         Search
@@ -18,15 +19,15 @@
 </form>
 
 <hr>
-
+<h3>Users Found:</h3>
 <div th:if="${users != null}">
 
     <div th:each="user : ${users}">
 
         <p>
             <strong>Name:</strong>
-            <span th:text="${user.firstName}"></span>
-            <span th:text="${user.lastName}"></span>
+            <span th:text="${user.firstName + ' ' + user.lastName}"></span>
+
         </p>
 
         <p>
@@ -39,6 +40,23 @@
 
     </div>
 
+</div>
+<h3>Posts Found:</h3>
+<div th:if="${posts != null}">
+    <div th:each="post : ${posts}">
+        <p>
+            <strong>Author:</strong>
+            <span th:text="${post.authorFirstName + ' ' + post.authorLastName}"></span>
+        </p>
+        <p>
+            <strong>Content:</strong>
+            <span th:text="${post.content}"></span>
+        </p>
+        <p>
+            <small>Posted at: <span th:text="${post.createdAt}"></span></small>
+        </p>
+        <hr>
+    </div>
 </div>
 
 <a href="/profile">My Profile</a>

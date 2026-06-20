@@ -13,6 +13,19 @@
 <p>Email:
     <span th:text="${user.email}"></span>
 </p>
+<p>Bio:
+    <span th:text="${user.bio != null ? user.bio : 'No bio added yet.'}"></span>
+</p>
+<p>Join Date:
+    <span th:text="${user.joinDate}"></span>
+</p>
+
+<p>Post Count:
+    <span th:text="${postCount}">0</span>
+</p>
+<p>Friend Count:
+    <span th:text="${friendCount}">0</span>
+</p>
 
 
 <a href="/profile/edit">Edit Profile</a>

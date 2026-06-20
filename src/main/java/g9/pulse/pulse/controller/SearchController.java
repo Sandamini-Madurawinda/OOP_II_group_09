@@ -1,7 +1,10 @@
 package g9.pulse.pulse.controller;
 
+import g9.pulse.pulse.model.Post;
 import g9.pulse.pulse.model.User;
 import g9.pulse.pulse.repository.UserRepository;
+import g9.pulse.pulse.service.PostService;
+import g9.pulse.pulse.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +14,14 @@ import java.util.List;
 
 @Controller
 public class SearchController {
-    private final UserRepository userRepository;
+    private final UserService userService;
+    private final PostService postService;
 
 
-    public SearchController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public SearchController(UserService userService, PostService postService) {
+
+        this.userService = userService;
+        this.postService = postService;
     }
 
     @GetMapping("/search")
@@ -23,15 +29,13 @@ public class SearchController {
             @RequestParam(required = false) String keyword,
             Model model) {
 
-        List<User> users;
+        List<User> users =userService.searchUsersByName(keyword);
+        List<Post> posts = postService.searchPostsByKeyword(keyword);
 
-        if (keyword == null || keyword.isBlank()) {
-            users = List.of();
-        } else {
-            users = userRepository.findByFirstNameContainingIgnoreCase(keyword);
-        }
 
         model.addAttribute("users", users);
+        model.addAttribute("posts", posts);
+        model.addAttribute("keyword", keyword);
 
         return "search";
     }

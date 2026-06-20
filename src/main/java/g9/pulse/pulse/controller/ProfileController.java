@@ -1,6 +1,7 @@
 package g9.pulse.pulse.controller;
 
 import g9.pulse.pulse.model.User;
+import g9.pulse.pulse.service.PostService;
 import g9.pulse.pulse.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +14,12 @@ import java.security.Principal;
 public class ProfileController {
 
     private final UserService userService;
+    private final PostService postService;
 
-    public ProfileController(UserService userService) {
+    public ProfileController(UserService userService,PostService postService) {
         this.userService = userService;
+        this.postService = postService;
+
     }
 
     // VIEW PROFILE
@@ -23,10 +27,13 @@ public class ProfileController {
     public String viewProfile(Principal principal, Model model) {
 
         String email = principal.getName();
-
         User user = userService.getByEmail(email);
+        long postCount = postService.getPostCountByUser(user.getFirstName(), user.getLastName());
 
+        long friendCount = 0;
         model.addAttribute("user", user);
+        model.addAttribute("postCount", postCount);
+        model.addAttribute("friendCount", friendCount);
 
         return "profile";
     }
@@ -48,11 +55,12 @@ public class ProfileController {
     @PostMapping("/edit")
     public String updateProfile(@RequestParam String firstName,
                                 @RequestParam String lastName,
+                                @RequestParam String bio,
                                 Principal principal) {
 
         String email = principal.getName();
 
-        userService.updateProfile(email, firstName, lastName);
+        userService.updateProfile(email, firstName, lastName, bio);
 
         return "redirect:/profile";
     }
