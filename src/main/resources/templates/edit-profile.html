@@ -6,31 +6,28 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-
+<div class="container">
 <h2>Edit Profile</h2>
 
 <form th:action="@{/profile/edit}" method="post">
 
-    First Name:
-    <input type="text" name="firstName" th:value="${user.firstName}">
-    <br><br>
+    <label for="firstName">First Name</label>
+    <input type="text" id="firstName" name="firstName" th:value="${user.firstName}" required />
 
-    Last Name:
-    <input type="text" name="lastName" th:value="${user.lastName}">
-    <br><br>
-    Bio:
-    <textarea name="bio" th:text="${user.bio}"></textarea>
-    <br><br>
+    <label for="lastName">Last Name</label>
+    <input type="text" id="lastName" name="lastName" th:value="${user.lastName}" required />
 
+    <label for="bio">Bio</label>
+    <textarea id="bio" name="bio" th:text="${user.bio}" placeholder="Write something about yourself..."></textarea>
 
-
-    <button type="submit">Save</button>
+    <button type="submit">Save Changes</button>
+    <a href="/profile" style="margin-top: 10px;">Cancel</a>
 
 </form>
+</div>
 
 <br>
 
-<a href="/profile">Back</a>
 
 </body>
 </html>
