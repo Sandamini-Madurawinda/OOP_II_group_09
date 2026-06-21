@@ -197,5 +197,20 @@ a:hover {
     gap: 12px;
 }
 
+textarea {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical; /* Allows users to drag the box bigger vertically */
+    min-height: 100px;
+    width: 100%;
+    transition: border-color 0.3s ease;
+}
 
+textarea:focus {
+    outline: none;
+}
 
