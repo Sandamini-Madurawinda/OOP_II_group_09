@@ -3,37 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<p>Name:
-    <span th:text="${user.firstName + ' ' + user.lastName}"></span>
-</p>
+<div class="container">
+    <h2>User Profile</h2>
 
-<p>Email:
-    <span th:text="${user.email}"></span>
-</p>
-<p>Bio:
-    <span th:text="${user.bio != null ? user.bio : 'No bio added yet.'}"></span>
-</p>
-<p>Join Date:
-    <span th:text="${user.joinDate}"></span>
-</p>
+    <div class="profile-card">
 
-<p>Post Count:
-    <span th:text="${postCount}">0</span>
-</p>
-<p>Friend Count:
-    <span th:text="${friendCount}">0</span>
-</p>
+        <div class="profile-avatar" style="border: 2px dashed #cccccc;">
+            <span>📸</span>
+        </div>
+        <h3 th:text="${user.firstName + ' ' + user.lastName}">FirstName</h3>
 
+        <p style="font-size: 0.85rem; opacity: 0.7; margin-top: -8px; margin-bottom: 12px;" th:text="${user.email}">user@email.com</p>
 
-<a href="/profile/edit">Edit Profile</a>
+        <p class="profile-bio" th:text="${user.bio != null && !user.bio.isEmpty() ? user.bio : 'No bio added yet.'}">
+            No bio added yet.
+        </p>
 
-<br><br>
+        <div class="profile-stats-grid" style="border-top: 1px solid #eeeeee; border-bottom: 1px solid #eeeeee;">
+            <div class="stat-item">
+                <span class="stat-value" th:text="${postCount}">0</span>
+                <span class="stat-label">Posts</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" th:text="${friendCount}">0</span>
+                <span class="stat-label">Friends</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" th:text="${user.joinDate != null ? user.joinDate : '2026'}">2026</span>
+                <span class="stat-label">Joined</span>
+            </div>
+        </div>
 
-<a href="/home">Home</a>
-
-
+        <div class="profile-actions">
+            <a href="/profile/edit" style="font-weight: bold;">📝 Edit Profile</a>
+            <a href="/home">🏠 Home Feed</a>
+        </div>
+    </div>
+</div>
 </body>
 </html>
