@@ -10,12 +10,11 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/posts") // Groups everything clearly under /posts
+@RequestMapping("/posts")
 public class PostController {
 
     private final PostRepository postRepository;
 
-    // Constructor Injection
     public PostController(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
