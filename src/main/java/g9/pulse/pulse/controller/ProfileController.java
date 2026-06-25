@@ -25,6 +25,9 @@ public class ProfileController {
     // VIEW PROFILE
     @GetMapping
     public String viewProfile(Principal principal, Model model) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
 
         String email = principal.getName();
         User user = userService.getByEmail(email);
@@ -51,6 +54,9 @@ public class ProfileController {
     // EDIT PAGE
     @GetMapping("/edit")
     public String editPage(Principal principal, Model model) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
 
         String email = principal.getName();
 
@@ -67,6 +73,9 @@ public class ProfileController {
                                 @RequestParam String lastName,
                                 @RequestParam String bio,
                                 Principal principal) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
 
         String email = principal.getName();
 

@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
-<div class="container">
+<div class="container profile-page">
     <h2>User Profile</h2>
 
     <div class="profile-card">
 
-        <div class="profile-avatar" style="border: 2px dashed #cccccc;">
+        <div class="profile-avatar">
             <span>📸</span>
         </div>
         <h3 th:text="${user.firstName + ' ' + user.lastName}">FirstName</h3>
 
-        <p style="font-size: 0.85rem; opacity: 0.7; margin-top: -8px; margin-bottom: 12px;" th:text="${user.email}">user@email.com</p>
+        <p class="profile-email" th:text="${user.email}">user@email.com</p>
 
         <p class="profile-bio" th:text="${user.bio != null && !user.bio.isEmpty() ? user.bio : 'No bio added yet.'}">
             No bio added yet.
         </p>
 
-        <div class="profile-stats-grid" style="border-top: 1px solid #eeeeee; border-bottom: 1px solid #eeeeee;">
+        <div class="profile-stats-grid">
             <div class="stat-item">
-                <span class="stat-value" th:text="${postCount}">0</span>
-                <span class="stat-label">Posts</span>
+                <div class="stat-value" th:text="${postCount}">0</div>
+                <div class="stat-label">Posts</div>
             </div>
             <div class="stat-item">
-                <span class="stat-value" th:text="${friendCount}">0</span>
-                <span class="stat-label">Friends</span>
+                <div class="stat-value" th:text="${friendCount}">0</div>
+                <div class="stat-label">Friends</div>
             </div>
             <div class="stat-item">
-                <span class="stat-value" th:text="${user.joinDate != null ? user.joinDate : '2026'}">2026</span>
-                <span class="stat-label">Joined</span>
+              <div class="stat-value" th:text="${user.joinDate != null ? user.joinDate : '2026'}">2026</div>
+                <div class="stat-label">Joined</div>
             </div>
         </div>
 
-        <div class="profile-actions">
-            <a href="/profile/edit" style="font-weight: bold;">📝 Edit Profile</a>
+        <div class="actions-layout-row">
+            <a href="/profile/edit">📝 Edit Profile</a>
             <a href="/home">🏠 Home Feed</a>
         </div>
     </div>
