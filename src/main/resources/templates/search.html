@@ -28,11 +28,13 @@
 
         <ul class="results-list" th:if="${users != null && !users.isEmpty()}">
             <li class="result-item" th:each="user : ${users}" style="border: 1px solid #eeeeee;">
+                <a th:href="@{/profile/{id}(id=${user.id})}" style="display: flex; align-items: center; gap: 12px; padding: 12px; text-decoration: none; color: inherit;">
                 <div class="result-avatar" style="border: 1px solid #cccccc; display: flex; align-items: center; justify-content: center;">👤</div>
                 <div class="result-info">
                     <span class="result-title" th:text="${user.firstName + ' ' + user.lastName}">Name</span>
                     <span class="result-subtitle" th:text="${user.email}">Email</span>
                 </div>
+                </a>
             </li>
         </ul>
     </div>
@@ -43,11 +45,13 @@
 
         <ul class="results-list" th:if="${posts != null && !posts.isEmpty()}">
             <li class="result-item" th:each="post : ${posts}" style="border: 1px solid #eeeeee; flex-direction: column; align-items: flex-start;">
+                <a th:href="@{/posts/{id}(id=${post.id})}" style="display: flex; flex-direction: column; align-items: flex-start; padding: 12px; text-decoration: none; color: inherit;">
                 <div class="result-info">
                     <span class="result-title" th:text="${post.authorFirstName + ' ' + post.authorLastName}">Author</span>
                     <span class="result-subtitle" style="opacity: 0.6;">Posted at: <span th:text="${post.createdAt}">Date</span></span>
                 </div>
                 <p style="margin-top: 6px; font-size: 0.95rem; line-height: 1.4;" th:text="${post.content}">Content</p>
+            </a>
             </li>
         </ul>
     </div>

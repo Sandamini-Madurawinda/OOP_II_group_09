@@ -37,6 +37,16 @@ public class ProfileController {
 
         return "profile";
     }
+    @GetMapping("/{id}")
+    public String viewOtherProfile(@PathVariable("id") Long id, Model model) {
+        User user = userService.getById(id);
+        long postCount = postService.getPostCountByUser(user.getFirstName(), user.getLastName());
+        long friendCount = 0;
+        model.addAttribute("user", user);
+        model.addAttribute("postCount", postCount);
+        model.addAttribute("friendCount", friendCount);
+        return "profile";
+    }
 
     // EDIT PAGE
     @GetMapping("/edit")
