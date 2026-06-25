@@ -22,9 +22,14 @@ public class Post {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    // Track the author (linked to the user entity)
+    // Track the author strings
     private String authorFirstName;
     private String authorLastName;
+
+    // Added: Clean relationship link to the User account entity
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private int likeCount = 0;
 
@@ -49,6 +54,11 @@ public class Post {
     public void setAuthorFirstName(String authorFirstName) { this.authorFirstName = authorFirstName; }
     public String getAuthorLastName() { return authorLastName; }
     public void setAuthorLastName(String authorLastName) { this.authorLastName = authorLastName; }
+
+    // Added: User property accessor methods
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+
     public int getLikeCount() { return likeCount; }
     public void setLikeCount(int likeCount) { this.likeCount = likeCount; }
     public boolean getIsLikedByCurrentUser() { return isLikedByCurrentUser; }
