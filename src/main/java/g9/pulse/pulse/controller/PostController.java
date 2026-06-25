@@ -16,6 +16,7 @@ public class PostController {
     private final PostRepository postRepository;
 
     public PostController(PostRepository postRepository) {
+
         this.postRepository = postRepository;
     }
 
@@ -45,5 +46,15 @@ public class PostController {
 
         postRepository.save(post);
         return "redirect:/posts/feed";
+    }
+    @GetMapping("/{id}")
+    public String viewSpecificPost(@PathVariable("id") Long id, Model model) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Post not found with id: " + id));
+        model.addAttribute("post", post);
+        return "home";
+
+
+
     }
 }

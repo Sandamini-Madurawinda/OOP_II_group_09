@@ -79,5 +79,9 @@ import java.util.List;
             }
             return repository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(keyword, keyword);
         }
+    public User getById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    }
     }
 
