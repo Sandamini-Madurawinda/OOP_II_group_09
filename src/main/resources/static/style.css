@@ -136,83 +136,132 @@ a:hover {
 
 
 
+.profile-page.container {
+    max-width: 450px;
+}
 
 
-
-.profile-card {
+.profile-page .profile-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     width: 100%;
+    margin-top: 10px;
 }
 
-.profile-avatar {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
+.profile-page .profile-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 16px;
+        background-color: #e4e6eb;
+        font-size: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ccd0d5;
+}
+.profile-page h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1c1e21;
+    margin-bottom: 2px;
+    text-transform: capitalize;
+}
+.profile-page .profile-email {
+    font-size: 0.9rem;
+    color: #65676b;
     margin-bottom: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    }
+
+.profile-page .profile-bio {
+       margin: 8px 0 24px 0;
+       font-size: 0.95rem;
+       line-height: 1.5;
+       color: #65676b;
+       text-align: center;
+       max-width: 100%;
+       background-color: #f0f2f5;
+       padding: 12px 16px;
+       border-radius: 8px;
+       font-style: normal;
 }
 
-.profile-bio {
-    margin: 12px 0 24px 0;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    font-style: italic;
-    width: 100%;
-}
-
-.profile-stats-grid {
+.profile-page .profile-stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     width: 100%;
     margin-bottom: 24px;
-    padding: 12px 0;
+     padding: 16px 0;
+     border-top: 1px solid #e5e5e5;
+     border-bottom: 1px solid #e5e5e5;
 }
 
-.stat-item {
+.profile-page .stat-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+        position: relative;
+}
+.profile-page .stat-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background-color: #e5e5e5;
 }
 
-.stat-value {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 4px;
+.profile-page .stat-value {
+    font-size: 1.3rem;
+        font-weight: 700;
+        color: #050505;
+        margin-bottom: 2px;
+       line-height: 1.2;
 }
 
-.stat-label {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.profile-page .stat-label {
+    font-size: 0.75rem;
+        color: #65676b;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
 }
-
-.profile-actions {
+.actions-layout-row {
     width: 100%;
     display: flex;
-    flex-direction: column;
     gap: 12px;
+    margin-top: 8px;
 }
 
-textarea {
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-family: inherit;
-    resize: vertical; /* Allows users to drag the box bigger vertically */
-    min-height: 100px;
-    width: 100%;
-    transition: border-color 0.3s ease;
+.profile-page .actions-layout-row a {
+    flex: 1;
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #e4e6eb;
+    color: #050505;
+    transition: background-color 0.2s ease;
 }
 
-textarea:focus {
-    outline: none;
+.profile-page .actions-layout-row a:hover {
+    background-color: #d8dadf;
+    color: #050505;
+    text-decoration: none;
+}
+
+
+.search-page.container {
+    max-width: 520px;
 }
 
 .search-page .search-box-wrapper {
@@ -227,10 +276,10 @@ textarea:focus {
     border-radius: 30px;
     margin-bottom: 0;
     padding: 16px 24px;
-        flex: 1;
+        flex: 2;
         border: 1px solid #ccd0d5;
         background-color: #f0f2f5;
-        font-size: 1.1rem
+        font-size: 1.1rem;
         transition: all 0.3s ease;
             box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
 
@@ -246,7 +295,7 @@ textarea:focus {
         margin-top: 0;
         margin-bottom: 0;
         padding: 0 32px;
-        border-radius: 20px;
+        border-radius: 30px;
         background-color: #e4e6eb;
         color: #050505;
         border: none;
