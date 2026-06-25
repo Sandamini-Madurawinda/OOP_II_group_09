@@ -6,7 +6,6 @@ import g9.pulse.pulse.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -45,7 +44,6 @@ import java.util.List;
 
             user.setEmail(dto.getEmail());
 
-
             user.setPassword(
                     passwordEncoder.encode(dto.getPassword())
             );
@@ -65,7 +63,6 @@ import java.util.List;
                                   String lastName,String bio) {
 
             User user = getByEmail(email);
-
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setBio(bio);
