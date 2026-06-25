@@ -6,13 +6,13 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div class="container">
+<div class="container search-page">
 <form th:action="@{/search}" method="get">
     <div class="search-box-wrapper">
         <input type="text"
            name="keyword"
            th:value="${keyword}"
-           placeholder="Search users or posts..."/>
+           placeholder=" 🔍 Search users or posts..."/>
 
     <button type="submit">
         Search
@@ -22,14 +22,14 @@
 </form>
 
     <div class="search-results-section">
-        <div class="search-section-title" style="border-bottom: 1px solid #eeeeee;">Users Found</div>
+        <div class="search-section-title">👥 Users Found</div>
 
         <p class="no-results-msg" th:if="${users == null || users.isEmpty()}">No matching users found.</p>
 
         <ul class="results-list" th:if="${users != null && !users.isEmpty()}">
-            <li class="result-item" th:each="user : ${users}" style="border: 1px solid #eeeeee;">
+            <li class="result-item" th:each="user : ${users}">
                 <a th:href="@{/profile/{id}(id=${user.id})}" style="display: flex; align-items: center; gap: 12px; padding: 12px; text-decoration: none; color: inherit;">
-                <div class="result-avatar" style="border: 1px solid #cccccc; display: flex; align-items: center; justify-content: center;">👤</div>
+                <div class="result-avatar">👤</div>
                 <div class="result-info">
                     <span class="result-title" th:text="${user.firstName + ' ' + user.lastName}">Name</span>
                 </div>
@@ -38,23 +38,23 @@
         </ul>
     </div>
     <div class="search-results-section">
-        <div class="search-section-title" style="border-bottom: 1px solid #eeeeee;">Posts Found</div>
+        <div class="search-section-title"> 📝 Posts Found</div>
 
         <p class="no-results-msg" th:if="${posts == null || posts.isEmpty()}">No matching posts found.</p>
 
         <ul class="results-list" th:if="${posts != null && !posts.isEmpty()}">
-            <li class="result-item" th:each="post : ${posts}" style="border: 1px solid #eeeeee; flex-direction: column; align-items: flex-start;">
-                <a th:href="@{/posts/{id}(id=${post.id})}" style="display: flex; flex-direction: column; align-items: flex-start; padding: 12px; text-decoration: none; color: inherit;">
+            <li class="result-item" th:each="post : ${posts}">
+                <a th:href="@{/posts/{id}(id=${post.id})}" style="display: flex; flex-direction: column; align-items: flex-start; padding: 12px; text-decoration: none; color: inherit;width: 100%;">
                 <div class="result-info">
                     <span class="result-title" th:text="${post.authorFirstName + ' ' + post.authorLastName}">Author</span>
-                    <span class="result-subtitle" style="opacity: 0.6;">Posted at: <span th:text="${post.createdAt}">Date</span></span>
+                    <span class="result-subtitle">Posted at: <span th:text="${post.createdAt}">Date</span></span>
                 </div>
                 <p style="margin-top: 6px; font-size: 0.95rem; line-height: 1.4;" th:text="${post.content}">Content</p>
             </a>
             </li>
         </ul>
     </div>
-    <div class="profile-actions" style="margin-top: 20px;">
+    <div class="profile-actions" >
         <a href="/profile">👤 My Profile</a>
         <a href="/home">🏠 Home Feed</a>
     </div>

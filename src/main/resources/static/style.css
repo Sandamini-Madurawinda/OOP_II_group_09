@@ -138,6 +138,7 @@ a:hover {
 
 
 
+
 .profile-card {
     display: flex;
     flex-direction: column;
@@ -213,37 +214,65 @@ textarea {
 textarea:focus {
     outline: none;
 }
-.search-box-wrapper {
+
+.search-page .search-box-wrapper {
     display: flex;
-    gap: 8px;
-    margin-bottom: 24px;
+    gap: 16px;
+    margin-bottom: 32px;
     width: 100%;
+
 }
 
-.search-box-wrapper input {
+.search-page .search-box-wrapper input {
+    border-radius: 30px;
     margin-bottom: 0;
-    flex: 1;
+    padding: 16px 24px;
+        flex: 1;
+        border: 1px solid #ccd0d5;
+        background-color: #f0f2f5;
+        font-size: 1.1rem
+        transition: all 0.3s ease;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+
+}
+.search-page .search-box-wrapper input:focus {
+    border-color: #8a8d91;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+    outline: none;
 }
 
-.search-box-wrapper button {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 0 20px;
+.search-page .search-box-wrapper button {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 0 32px;
+        border-radius: 20px;
+        background-color: #e4e6eb;
+        color: #050505;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 1.05rem;
+        transition: background-color 0.2s ease;
+
+}
+.search-page .search-box-wrapper button:hover {
+    background-color: #d8dadf;
 }
 
-.search-results-section {
-    width: 100%;
-    margin-top: 20px;
+.search-page .search-page.search-results-section {
+   margin-top: 24px;
+   width: 100%;
 }
 
-.search-section-title {
+.search-page .search-section-title {
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 12px;
     padding-bottom: 6px;
 }
 
-.results-list {
+.search-page .results-list {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -251,37 +280,42 @@ textarea:focus {
     margin-bottom: 20px;
 }
 
-.result-item {
+.search-page .result-item {
     padding: 12px;
-    border-radius: 4px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 12px;
+    transition: background-color 0.2s ease;
+}
+.search-page .result-item:hover {
+    background-color: #f2f3f5;
 }
 
-.result-avatar {
+.search-page .result-avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     flex-shrink: 0;
 }
 
-.result-info {
+.search-page .result-info {
     display: flex;
     flex-direction: column;
     gap: 2px;
 }
 
-.result-title {
+.search-page .result-title {
     font-weight: 600;
     font-size: 0.95rem;
 }
 
-.result-subtitle {
+.search-page .result-subtitle {
     font-size: 0.8rem;
 }
 
-.no-results-msg {
+.search-page .no-results-msg {
     text-align: center;
     padding: 16px;
     font-size: 0.9rem;
