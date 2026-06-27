@@ -1,23 +1,21 @@
 package g9.pulse.pulse.entity;
 import g9.pulse.pulse.model.User;
 import g9.pulse.pulse.model.Post;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
 
 
 @Entity
 public class FriendRequest {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User sender;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User receiver;
 
     private String status; // PENDING, ACCEPTED, REJECTED

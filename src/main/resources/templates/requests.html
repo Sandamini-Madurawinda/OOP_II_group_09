@@ -62,18 +62,20 @@
             <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-between items-center">
 
                 <span class="font-medium text-slate-700">
-                    ${req.sender.username}
+                    ${req.sender.firstName} ${req.sender.lastName}
                 </span>
 
                 <div class="space-x-2">
 
                     <button
                         class="accept bg-green-500 text-white px-3 py-1.5 rounded-lg text-sm">
+                        data-id="${req.id}">
                         Accept
                     </button>
 
                     <button
                         class="reject bg-red-500 text-white px-3 py-1.5 rounded-lg text-sm">
+                        data-id="${req.id}">
                         Reject
                     </button>
 
