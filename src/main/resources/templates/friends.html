@@ -1,10 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Friends</title>
+    <script src="/js/friends.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pulseBlue: '#4a90e2',
+                        pulseBg: '#f4f7f6'
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+
+<body class="bg-pulseBg min-h-screen">
+
+<!-- NAVBAR (same as feed) -->
+<nav class="fixed top-0 left-0 w-full h-16 bg-white border-b shadow-sm z-50">
+    <div class="max-w-2xl mx-auto h-full flex items-center justify-between px-4">
+        <span class="text-xl font-bold text-pulseBlue">Pulse</span>
+
+        <div class="flex space-x-6 text-sm font-semibold text-slate-600">
+            <a href="/posts/feed">Feed</a>
+            <a class="text-pulseBlue" href="/friends-page">Friends</a>
+            <a href="/requests-page">Requests</a>
+            <a href="#">Profile</a>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENT -->
+<main class="max-w-2xl mx-auto pt-24 px-4">
+
+    <h2 class="text-lg font-bold text-slate-700 mb-4">
+        People You May Know
+    </h2>
+
+    <div id="users" class="space-y-3"></div>
+
+</main>
+
+<script>
+    fetch('/friends/users')
+    .then(res => res.json())
+    .then(users => {
+
+        let html = '';
+
+        users.forEach(user => {
+
+            html += `
+            <div class="bg-white p-4 rounded-xl shadow-sm flex justify-between items-center border border-gray-100">
+
+                <span class="font-medium text-slate-700">
+                    ${user.username}
+                </span>
+
+                <button
+                    class="send-request bg-pulseBlue text-white px-4 py-1.5 rounded-lg text-sm hover:opacity-90"
+                    data-id="${user.id}">
+                    Add Friend
+                </button>
+
+            </div>`;
+        });
+
+        document.getElementById('users').innerHTML = html;
+
+        initializeFriendButtons();
+    });
+</script>
 
 </body>
 </html>

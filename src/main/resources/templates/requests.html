@@ -1,10 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Friend Requests</title>
+    <script src="/js/friends.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pulseBlue: '#4a90e2',
+                        pulseBg: '#f4f7f6'
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+
+<body class="bg-pulseBg min-h-screen">
+
+<!-- NAVBAR (same as feed) -->
+<nav class="fixed top-0 left-0 w-full h-16 bg-white border-b shadow-sm z-50">
+    <div class="max-w-2xl mx-auto h-full flex items-center justify-between px-4">
+        <span class="text-xl font-bold text-pulseBlue">Pulse</span>
+
+        <div class="flex space-x-6 text-sm font-semibold text-slate-600">
+            <a href="/posts/feed">Feed</a>
+            <a href="/friends-page">Friends</a>
+            <a class="text-pulseBlue" href="/requests-page">Requests</a>
+            <a href="#">Profile</a>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENT -->
+<main class="max-w-2xl mx-auto pt-24 px-4">
+
+    <h2 class="text-lg font-bold text-slate-700 mb-4">
+        Friend Requests
+    </h2>
+
+    <div id="requests" class="space-y-3"></div>
+
+</main>
+
+<script>
+
+    const userId = 1;
+
+    fetch(`/friends/requests?userId=${userId}`)
+    .then(res => res.json())
+    .then(requests => {
+
+        let html = '';
+
+        requests.forEach(req => {
+
+            html += `
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-between items-center">
+
+                <span class="font-medium text-slate-700">
+                    ${req.sender.username}
+                </span>
+
+                <div class="space-x-2">
+
+                    <button
+                        class="accept bg-green-500 text-white px-3 py-1.5 rounded-lg text-sm">
+                        Accept
+                    </button>
+
+                    <button
+                        class="reject bg-red-500 text-white px-3 py-1.5 rounded-lg text-sm">
+                        Reject
+                    </button>
+
+                </div>
+
+            </div>`;
+        });
+
+        document.getElementById('requests').innerHTML = html;
+
+        initializeAcceptRejectButtons();
+    });
+
+</script>
 
 </body>
 </html>
