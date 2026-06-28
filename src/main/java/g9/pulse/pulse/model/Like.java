@@ -1,11 +1,14 @@
-package g9.pulse.pulse.entity;
-import g9.pulse.pulse.model.User;
-import g9.pulse.pulse.model.Post;
+package g9.pulse.pulse.model;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "likes")
+@Table(
+        name = "likes",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"user_id", "post_id"})
+        }
+)
 public class Like {
 
     @Id
@@ -47,3 +50,4 @@ public class Like {
         this.post = post;
     }
 }
+

@@ -1,6 +1,6 @@
 package g9.pulse.pulse.service;
 
-import g9.pulse.pulse.entity.Like;
+import g9.pulse.pulse.model.Like;
 import g9.pulse.pulse.model.Post;
 import g9.pulse.pulse.model.User;
 import g9.pulse.pulse.repository.LikeRepository;
