@@ -35,19 +35,25 @@ public class ProfileController {
 
         long friendCount = 0;
         model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         model.addAttribute("postCount", postCount);
         model.addAttribute("friendCount", friendCount);
 
         return "profile";
     }
     @GetMapping("/{id}")
-    public String viewOtherProfile(@PathVariable("id") Long id, Model model) {
+    public String viewOtherProfile(@PathVariable("id") Long id,Principal principal, Model model) {
         User user = userService.getById(id);
         long postCount = postService.getPostCountByUser(user.getFirstName(), user.getLastName());
         long friendCount = 0;
         model.addAttribute("user", user);
         model.addAttribute("postCount", postCount);
         model.addAttribute("friendCount", friendCount);
+        if (principal != null) {
+            String email = principal.getName();
+            User loggedInUser = userService.getByEmail(email);
+            model.addAttribute("loggedUser", loggedInUser);
+        }
         return "profile";
     }
 
