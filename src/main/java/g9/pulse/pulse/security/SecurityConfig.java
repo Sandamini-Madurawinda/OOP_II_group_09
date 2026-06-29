@@ -27,7 +27,7 @@ public class SecurityConfig {
                                 "/",
                                 "/login",
                                 "/register",
-                                "/style.css/**",
+                                "/css/**",
                                 "/profile",
                                 "/edit-profile",
                                 "/search"

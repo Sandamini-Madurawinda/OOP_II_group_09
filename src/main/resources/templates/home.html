@@ -1,104 +1,58 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pulse - Home Feed</title>
-    <!-- Tailwind CSS Engine -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        pulseBlue: '#4a90e2',
-                        pulseBg: '#f4f7f6'
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-pulseBg min-h-screen text-slate-800 antialiased font-sans">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      th:replace="~{layout :: layout(~{::content})}">
+<head></head>
+<body>
 
-<!-- Fixed Modern Top Navigation Bar -->
-<nav class="fixed top-0 left-0 w-full h-16 bg-white border-b border-gray-200/80 shadow-sm z-50">
-    <div class="max-w-2xl mx-auto h-full flex items-center justify-between px-4">
-        <span class="text-xl font-bold text-pulseBlue tracking-tight">Pulse</span>
-        <div class="flex items-center space-x-6 text-sm font-semibold text-slate-600">
-            <a th:href="@{/posts/feed}" class="text-pulseBlue">
-                Feed
-            </a>
-            <a th:href="@{/friends-page}" class="hover:text-pulseBlue transition-colors">
-                Friends
-            </a>
-            <a th:href="@{/requests-page}" class="hover:text-pulseBlue transition-colors">
-                Requests
-            </a>
-            <a href="#" class="hover:text-pulseBlue transition-colors">
-                Profile
-            </a>
-            <a th:href="@{/logout}" class="text-red-500 hover:text-red-600 transition-colors">
-                Logout
-            </a>
-        </div>
-    </div>
-</nav>
+<th:block th:fragment="content">
 
-<!-- Main Central Timeline Workspace -->
-<main class="max-w-2xl mx-auto pt-24 pb-12 px-4 space-y-6">
-
-    <!-- Component A: Injects the horizontal post submission card -->
+    <!-- Post Form -->
     <div th:replace="~{fragments/post-form :: create-post-card}"></div>
 
-    <!-- Component B: Activity Feed Timeline Container -->
-    <div class="space-y-4">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Recent Updates</h3>
+    <!-- Feed -->
+    <div>
+        <p class="feed-label">Recent Updates</p>
 
-        <!-- Fallback panel display if timeline is empty -->
-        <div th:if="${#lists.isEmpty(posts)}" class="bg-white border border-gray-200 rounded-xl p-10 text-center shadow-sm">
-            <p class="text-sm text-slate-500">No posts on your timeline yet. Be the first to share an update!</p>
+        <div th:if="${#lists.isEmpty(posts)}" class="empty-state">
+            <p>No posts yet. Be the first to share!</p>
         </div>
 
-        <!-- Iterates over rows and maps content -->
         <div th:each="post : ${posts}">
             <div th:replace="~{fragments/post-card :: post-card(post=${post})}"></div>
         </div>
     </div>
 
-</main>
+    <!-- Like Script -->
+    <script th:inline="javascript">
+        function toggleLike(postId) {
+            const likeBtn = document.getElementById(`like-btn-${postId}`);
+            const likeCountSpan = document.getElementById(`like-count-${postId}`);
 
-<!-- Unified Asynchronous Interactive Metric Handling Script -->
-<script th:inline="javascript">
-    function toggleLike(postId) {
-        const likeBtn = document.getElementById(`like-btn-${postId}`);
-        const likeCountSpan = document.getElementById(`like-count-${postId}`);
+            fetch(`/api/posts/${postId}/like`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network failure');
+                return response.json();
+            })
+            .then(data => {
+                likeCountSpan.textContent = data.newLikeCount;
+                if (data.liked) {
+                    likeBtn.classList.add('liked');
+                } else {
+                    likeBtn.classList.remove('liked');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Could not update like. Try again.');
+            });
+        }
+    </script>
 
-        fetch(`/api/posts/${postId}/like`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Network failure');
-            return response.json();
-        })
-        .then(data => {
-            likeCountSpan.textContent = data.newLikeCount;
+</th:block>
 
-            if (data.liked) {
-                likeBtn.classList.add('text-pulseBlue', 'font-semibold');
-                likeBtn.classList.remove('text-slate-500');
-            } else {
-                likeBtn.classList.remove('text-pulseBlue', 'font-semibold');
-                likeBtn.classList.add('text-slate-500');
-            }
-        })
-        .catch(error => {
-            console.error('Error handling like operation:', error);
-            alert('Could not update like status. Please try again.');
-        });
-    }
-</script>
 </body>
 </html>
 //test
