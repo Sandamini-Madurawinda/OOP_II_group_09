@@ -1,40 +1,54 @@
 <div xmlns:th="http://www.thymeleaf.org">
-    <div th:fragment="create-post-card" class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-        <form th:action="@{/posts/create}" th:object="${postForm}" method="POST" class="space-y-4">
+    <div th:fragment="create-post-card" class="post-form-card">
+        <form th:action="@{/posts/create}" th:object="${postForm}" method="POST">
 
-            <!-- Horizontal Row Split Framework -->
-            <div class="flex items-start space-x-4">
-                <!-- Dynamic Input Left Avatar Initial -->
-                <div class="w-10 h-10 rounded-full bg-[#eaf2fc] border border-[#d0e2f9] flex items-center justify-center font-bold text-pulseBlue shrink-0 text-sm">
-                    <span th:text="${currentUser != null} ? ${#strings.substring(currentUser.firstName, 0, 1)} : 'U'">U</span>
+            <!-- Row: Avatar + Textarea -->
+            <div class="post-form-row">
+
+                <!-- Avatar -->
+                <div class="post-form-avatar">
+                    <span th:text="${currentUser != null} ?
+                        ${#strings.substring(currentUser.firstName, 0, 1)} : 'U'">U</span>
                 </div>
 
-                <!-- Main Input Field block -->
-                <div class="flex-1">
+                <!-- Textarea -->
+                <div class="post-form-input-wrap">
                     <textarea th:field="*{content}"
                               rows="3"
-                              class="w-full bg-slate-50 border border-gray-200 rounded-lg p-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-pulseBlue focus:bg-white transition-all resize-none"
+                              class="post-form-textarea"
                               placeholder="What's on your mind?..."
                               required></textarea>
                 </div>
+
             </div>
 
-            <!-- Validation Error Alert Frame Block -->
+            <!-- Validation Error -->
             <p th:if="${#fields.hasErrors('content')}"
                th:errors="*{content}"
-               class="text-xs text-red-500 font-medium pl-14"></p>
+               class="post-form-error"></p>
 
-            <div class="border-t border-gray-100 pt-3 flex items-center justify-between pl-14">
-                <div class="flex items-center space-x-2 text-slate-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            <!-- Footer Row: Label + Submit -->
+            <div class="post-form-footer">
+
+                <div class="post-form-label">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="post-form-icon"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002
+                                 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0
+                                 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
-                    <span class="text-xs font-medium select-none">Text only</span>
+                    <span>Text only</span>
                 </div>
 
-                <button type="submit" class="bg-pulseBlue hover:bg-[#357abd] text-white px-5 py-2 text-xs font-bold rounded-md shadow-sm transition-colors duration-200">
+                <button type="submit" class="post-form-btn">
                     Post
                 </button>
+
             </div>
 
         </form>
