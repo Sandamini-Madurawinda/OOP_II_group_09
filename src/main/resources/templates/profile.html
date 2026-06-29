@@ -41,6 +41,9 @@
         <div class="actions-layout-row">
             <a href="/profile/edit">📝 Edit Profile</a>
             <a href="/home">🏠 Home Feed</a>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="logout-btn" onclick="return confirm('Are you sure you want to log out?');">🚪 Logout</button>
+            </form>
         </div>
     </div>
 </div>
