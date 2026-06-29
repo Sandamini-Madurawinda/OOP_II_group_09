@@ -465,6 +465,32 @@ a:hover {
     transform: translateY(-1px);
 }
 
+/* ===== FOOTER ===== */
+.footer {
+    background: linear-gradient(135deg, #1a365d 0%, #2d6a9f 100%);
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    padding: 24px 16px;
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+    margin-top: 48px;
+}
+
+.footer p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer p::before {
+    content: '✦ ';
+    color: #63b3ed;
+}
+
+.footer p::after {
+    content: ' ✦';
+    color: #63b3ed;
+}
+
 /* ===== RESPONSIVE NAVBAR ===== */
 @media (max-width: 600px) {
     .navbar-inner {
