@@ -74,7 +74,7 @@ import java.util.List;
             if (keyword == null || keyword.isBlank()) {
                 return List.of();
             }
-            return repository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(keyword, keyword);
+            return repository.searchByFullNameContaining(keyword.trim());
         }
     public User getById(Long id) {
         return repository.findById(id)
