@@ -371,5 +371,120 @@ a:hover {
     font-size: 0.9rem;
     font-style: italic;
 }
+.main-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 24px 48px 24px;
+}
 
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background: linear-gradient(135deg, #1a365d 0%, #2d6a9f 100%);
+    box-shadow: 0 2px 20px rgba(26, 54, 93, 0.3);
+    z-index: 999;
+}
 
+.navbar-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    position: relative;
+}
+
+.navbar-brand::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #63b3ed;
+    border-radius: 2px;
+}
+
+/* ===== NAV LINKS ===== */
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.navbar-links a {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    letter-spacing: 0.2px;
+}
+
+.navbar-links a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.navbar-links a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* ===== LOGOUT BUTTON STYLE ===== */
+.navbar-links a.logout {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #fc8181;
+    margin-left: 8px;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.navbar-links a.logout:hover {
+    background-color: #ef4444;
+    color: #ffffff;
+    border-color: #ef4444;
+    transform: translateY(-1px);
+}
+
+/* ===== RESPONSIVE NAVBAR ===== */
+@media (max-width: 600px) {
+    .navbar-inner {
+        padding: 0 12px;
+    }
+
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+
+    .navbar-links {
+        gap: 2px;
+    }
+
+    .navbar-links a {
+        padding: 6px 8px;
+        font-size: 0.78rem;
+    }
+
+    .navbar-links a.logout {
+        margin-left: 4px;
+    }
+}
