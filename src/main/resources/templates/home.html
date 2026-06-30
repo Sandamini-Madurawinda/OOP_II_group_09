@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en"
       th:replace="~{layout :: layout(~{::content})}">
-<head></head>
+<head>
+    <title>Home</title>
+</head>
 <body>
 
 <th:block th:fragment="content">
 
-    <!-- Post Form -->
     <div th:replace="~{fragments/post-form :: create-post-card}"></div>
 
-    <!-- Feed -->
     <div>
         <p class="feed-label">Recent Updates</p>
 
@@ -22,7 +22,6 @@
         </div>
     </div>
 
-    <!-- Like Script -->
     <script th:inline="javascript">
         function toggleLike(postId) {
             const likeBtn = document.getElementById(`like-btn-${postId}`);

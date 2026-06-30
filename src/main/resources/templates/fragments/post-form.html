@@ -2,16 +2,13 @@
     <div th:fragment="create-post-card" class="post-form-card">
         <form th:action="@{/posts/create}" th:object="${postForm}" method="POST">
 
-            <!-- Row: Avatar + Textarea -->
             <div class="post-form-row">
 
-                <!-- Avatar -->
                 <div class="post-form-avatar">
                     <span th:text="${currentUser != null} ?
                         ${#strings.substring(currentUser.firstName, 0, 1)} : 'U'">U</span>
                 </div>
 
-                <!-- Textarea -->
                 <div class="post-form-input-wrap">
                     <textarea th:field="*{content}"
                               rows="3"
@@ -22,12 +19,10 @@
 
             </div>
 
-            <!-- Validation Error -->
             <p th:if="${#fields.hasErrors('content')}"
                th:errors="*{content}"
                class="post-form-error"></p>
 
-            <!-- Footer Row: Label + Submit -->
             <div class="post-form-footer">
 
                 <div class="post-form-label">

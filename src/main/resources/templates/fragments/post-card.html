@@ -3,10 +3,8 @@
          th:id="'post-card-' + ${post.id}"
          class="post-card">
 
-        <!-- Card Header -->
         <div class="post-header">
 
-            <!-- Avatar -->
             <div class="post-avatar">
                 <span th:text="${post.user != null} ?
                     ${#strings.substring(post.user.firstName, 0, 1)} :
@@ -14,7 +12,6 @@
                     ${#strings.substring(post.authorFirstName, 0, 1)} : 'U')">U</span>
             </div>
 
-            <!-- Name and Time -->
             <div class="post-meta">
                 <h4 class="post-author"
                     th:text="${post.user != null} ?
@@ -34,12 +31,10 @@
 
         </div>
 
-        <!-- Post Content -->
         <div class="post-content" th:text="${post.content}">
             Post content goes here.
         </div>
 
-        <!-- Like Button -->
         <div class="post-actions">
             <button type="button"
                     th:onclick="'toggleLike(' + ${post.id} + ')'"
@@ -47,7 +42,6 @@
                     class="like-btn"
                     th:classappend="${post.isLikedByCurrentUser} ? ' liked' : ''">
 
-                <!-- Like Icon -->
                 <svg xmlns="http://www.w3.org/2000/svg"
                      class="like-icon"
                      viewBox="0 0 20 20"
