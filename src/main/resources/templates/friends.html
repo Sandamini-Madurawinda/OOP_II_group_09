@@ -3,7 +3,6 @@
       th:replace="~{layout :: layout(~{::content})}">
 <head>
     <title>Friends</title>
-    <script src="/js/friends.js"></script>
 </head>
 
 <body>
@@ -17,7 +16,7 @@
     <div id="users"></div>
 
 </main>
-
+    <script src="/js/friends.js"></script>
 <script>
     fetch('/friends/users')
     .then(res => res.json())
