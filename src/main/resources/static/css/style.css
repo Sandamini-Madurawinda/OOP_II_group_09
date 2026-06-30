@@ -279,7 +279,7 @@ a:hover {
 
 .search-page .search-box-wrapper {
     display: flex;
-    gap: 0;          /* remove gap */
+    gap: 0;
     position: relative;
     margin-bottom: 32px;
     width: 100%;
@@ -288,7 +288,7 @@ a:hover {
 .search-page .search-box-wrapper input {
     border-radius: 30px;
     margin-bottom: 0;
-    padding: 16px 56px 16px 24px;  /* extra right padding for the icon */
+    padding: 16px 56px 16px 24px;
     flex: 1;
     border: 1px solid #ccd0d5;
     background-color: #f0f2f5;
@@ -383,7 +383,7 @@ a:hover {
     font-size: 0.9rem;
     font-style: italic;
 }
-/* Top bar (used on search page instead of navbar) */
+
 .search-topbar {
     background: linear-gradient(135deg, #1a365d 0%, #2d6a9f 100%);
     height: 64px;
@@ -448,7 +448,6 @@ a:hover {
     box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
 }
 
-/* Search button icon sizing */
 .search-page .search-box-wrapper button {
     width: 52px;
     padding: 0;
@@ -593,7 +592,6 @@ a:hover {
     border-radius: 2px;
 }
 
-/* ===== NAV LINKS ===== */
 .navbar-links {
     display: flex;
     align-items: center;
