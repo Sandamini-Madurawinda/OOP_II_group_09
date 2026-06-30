@@ -460,7 +460,6 @@ a:hover {
     font-weight: 700;
 }
 
-/* ===== LOGOUT BUTTON STYLE ===== */
 .navbar-links a.logout {
     background-color: rgba(239, 68, 68, 0.15);
     color: #fc8181;
@@ -475,7 +474,6 @@ a:hover {
     transform: translateY(-1px);
 }
 
-/* ===== FOOTER ===== */
 .footer {
     background: linear-gradient(135deg, #1a365d 0%, #2d6a9f 100%);
     color: rgba(255, 255, 255, 0.7);
@@ -501,7 +499,7 @@ a:hover {
     content: ' ✦';
     color: #63b3ed;
 }
- /* ===== POST CARD ===== */
+
 .post-card {
     background-color: #ffffff;
     border: 1px solid #e5e7eb;
@@ -644,7 +642,6 @@ a:hover {
     color: #64748b;
 }
 
- /* ===== POST FORM CARD ===== */
 .post-form-card {
     background-color: #ffffff;
     border: 1px solid #e5e7eb;
@@ -764,8 +761,76 @@ a:hover {
     transform: translateY(0);
     box-shadow: 0 2px 6px rgba(26, 54, 93, 0.3);
 }
+.friends-page .page-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a365d;
+    margin-bottom: 20px;
+}
 
-/* ===== RESPONSIVE NAVBAR ===== */
+#users {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.user-card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 16px 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.user-card:hover {
+    box-shadow: 0 4px 16px rgba(26, 54, 93, 0.1);
+    transform: translateY(-1px);
+}
+
+.user-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a365d;
+    text-transform: capitalize;
+}
+
+.send-request {
+    background: linear-gradient(135deg, #1a365d, #2d6a9f);
+    color: #ffffff;
+    border: none;
+    padding: 10px 22px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 6px rgba(26, 54, 93, 0.3);
+}
+
+.send-request:hover {
+    background: linear-gradient(135deg, #2d6a9f, #1a365d);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 54, 93, 0.35);
+}
+
+.send-request:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(26, 54, 93, 0.3);
+}
+
+.send-request:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/*Responisve*/
 @media (max-width: 600px) {
     .navbar-inner {
         padding: 0 12px;
@@ -822,4 +887,13 @@ a:hover {
     .post-actions {
         padding-left: 0;
     }
+
+     .user-card {
+            padding: 14px 16px;
+        }
+
+     .send-request {
+            padding: 8px 16px;
+            font-size: 0.8rem;
+     }
 }
