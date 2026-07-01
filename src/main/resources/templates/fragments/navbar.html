@@ -9,19 +9,19 @@
         <span class="navbar-brand">Pulse</span>
 
         <div class="navbar-links">
-            <a th:href="@{/posts/feed}" class="active">
+            <a th:href="@{/posts/feed}" data-path="/posts/feed">
                 &#9741; Feed
             </a>
-            <a th:href="@{/friends-page}">
+            <a th:href="@{/friends-page}" data-path="/friends-page">
                 &#9825; Friends
             </a>
-            <a th:href="@{/requests-page}">
+            <a th:href="@{/requests-page}" data-path="/requests-page">
                 &#9993; Requests
             </a>
-            <a th:href="@{/profile}">
+            <a th:href="@{/profile}" data-path="/profile">
                 &#9786; Profile
             </a>
-            <a th:href="@{/search}">
+            <a th:href="@{/search}" data-path="/search">
                 &#9906; Search
             </a>
             <a th:href="@{/logout}" class="logout">
@@ -30,7 +30,17 @@
         </div>
 
     </div>
+
+    <script>
+        document.querySelectorAll('.navbar-links a[data-path]').forEach(link => {
+            if (window.location.pathname === link.getAttribute('data-path')) {
+                link.classList.add('active');
+            }
+        });
+    </script>
 </nav>
+
+
 
 </body>
 </html>

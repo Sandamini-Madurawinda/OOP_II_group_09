@@ -455,6 +455,9 @@ a:hover {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    background: none;
+    box-shadow: none;
+    border: none;
 }
 
 .search-page .search-box-wrapper button svg {
