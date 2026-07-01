@@ -146,4 +146,10 @@ public class FriendService {
     public List<FriendRequest> getRequests(Long userId) {
         return repo.findByReceiverIdAndStatus(userId, "PENDING");
     }
+
+    public boolean areFriends(Long userId1, Long userId2) {
+        boolean oneWay = repo.findBySenderIdAndReceiverIdAndStatus(userId1, userId2, "ACCEPTED").isPresent();
+        boolean otherWay = repo.findBySenderIdAndReceiverIdAndStatus(userId2, userId1, "ACCEPTED").isPresent();
+        return oneWay || otherWay;
+    }
 }

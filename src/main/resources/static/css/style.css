@@ -455,6 +455,9 @@ a:hover {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    background: none;
+    box-shadow: none;
+    border: none;
 }
 
 .search-page .search-box-wrapper button svg {
@@ -1471,4 +1474,62 @@ button.comment-send-btn:hover {
 
 .comment-edit-actions button:hover {
     text-decoration: underline;
+}
+
+.post-privacy-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #f0f7ff;
+    border: 1px solid #d0e2f9;
+    border-radius: 20px;
+    padding: 8px 36px 8px 16px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #1a365d;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%231a365d'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 14px;
+}
+
+.post-privacy-select:hover {
+    background-color: #e0edfc;
+    border-color: #3182ce;
+    transform: translateY(-1px);
+}
+
+.post-privacy-select:focus {
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+    background-color: #ffffff;
+}
+
+.post-privacy-select option {
+    font-weight: 600;
+    color: #1a365d;
+    background-color: #ffffff;
+    padding: 8px;
+}
+.post-form-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.privacy-badge {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 6px;
+    color: #94a3b8;
+    vertical-align: middle;
+}
+
+.privacy-badge svg {
+    width: 13px;
+    height: 13px;
 }

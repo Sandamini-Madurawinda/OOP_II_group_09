@@ -37,6 +37,10 @@ public class Post {
     // LIKE COUNT
     private int likeCount = 0;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PostPrivacy privacy = PostPrivacy.PUBLIC;
+
     // UI ONLY FIELD
     @Transient
     private long dislikeCount = 0;
@@ -148,6 +152,14 @@ public class Post {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public PostPrivacy getPrivacy() {
+        return privacy;
+    }
+
+    public void setPrivacy(PostPrivacy privacy) {
+        this.privacy = privacy;
     }
 
 }
