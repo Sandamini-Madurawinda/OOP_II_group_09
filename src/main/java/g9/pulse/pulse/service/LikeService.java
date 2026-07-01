@@ -5,6 +5,7 @@ import g9.pulse.pulse.model.Post;
 import g9.pulse.pulse.model.User;
 import g9.pulse.pulse.repository.LikeRepository;
 import g9.pulse.pulse.repository.PostRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,43 +20,75 @@ public class LikeService {
     @Autowired
     private PostRepository postRepository;
 
-    public boolean toggleLike(Long postId, User user) {
+    public void handleLikeOrDislike(Long postId,
+                                    User user,
+                                    boolean actionIsDislike) {
 
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new RuntimeException("Post not found"));
+                .orElseThrow(() ->
+                        new RuntimeException("Post not found"));
 
         Optional<Like> existingLike =
                 likeRepository.findByUserAndPost(user, post);
 
         if (existingLike.isPresent()) {
 
-            likeRepository.delete(existingLike.get());
+            Like dbLike = existingLike.get();
 
-            post.setLikeCount(post.getLikeCount() - 1);
-            postRepository.save(post);
+            // remove existing reaction
+            if (dbLike.isDislike() == actionIsDislike) {
 
-            return false;
+                likeRepository.delete(dbLike);
+
+            } else {
+
+                // switch like/dislike
+                dbLike.setDislike(actionIsDislike);
+                likeRepository.save(dbLike);
+            }
 
         } else {
 
-            Like like = new Like();
-            like.setUser(user);
-            like.setPost(post);
+            // create new reaction
+            Like newLike = new Like();
+            newLike.setUser(user);
+            newLike.setPost(post);
+            newLike.setDislike(actionIsDislike);
 
-            likeRepository.save(like);
-
-            post.setLikeCount(post.getLikeCount() + 1);
-            postRepository.save(post);
-
-            return true;
+            likeRepository.save(newLike);
         }
     }
 
+    // total likes
     public long getLikeCount(Long postId) {
 
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new RuntimeException("Post not found"));
+                .orElseThrow(() ->
+                        new RuntimeException("Post not found"));
 
-        return likeRepository.countByPost(post);
+        return likeRepository.countByPostAndIsDislike(post, false);
+    }
+
+    // total dislikes
+    public long getDislikeCount(Long postId) {
+
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() ->
+                        new RuntimeException("Post not found"));
+
+        return likeRepository.countByPostAndIsDislike(post, true);
+    }
+
+    // current user reaction
+    public Like getUserAction(User user, Long postId) {
+
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() ->
+                        new RuntimeException("Post not found"));
+
+        return likeRepository
+                .findByUserAndPost(user, post)
+                .orElse(null);
     }
 }
+

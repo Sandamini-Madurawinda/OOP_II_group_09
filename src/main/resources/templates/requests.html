@@ -45,13 +45,12 @@
     <div id="requests" class="space-y-3"></div>
 
 </main>
-<script th:inline="javascript">
-    const currentUserId = [[${currentUser.id}]];
-    console.log("Current User ID:", currentUserId);
-</script>
 
 <script>
-    fetch(`/friends/requests?userId=${currentUserId}`)
+
+    const userId = 1;
+
+    fetch(`/friends/requests?userId=${userId}`)
     .then(res => res.json())
     .then(requests => {
 

@@ -27,7 +27,7 @@ public class SecurityConfig {
                                 "/",
                                 "/login",
                                 "/register",
-                                "/style.css/**",
+                                "/css/**",
                                 "/profile",
                                 "/edit-profile",
                                 "/search"
@@ -44,7 +44,7 @@ public class SecurityConfig {
 
                         .loginPage("/login")
 
-                        .defaultSuccessUrl("/home",true)
+                        .defaultSuccessUrl("/posts/feed",true)
 
                         .permitAll()
 

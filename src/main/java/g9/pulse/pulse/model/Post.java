@@ -3,7 +3,9 @@ package g9.pulse.pulse.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -13,54 +15,139 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Post content text-only validation requirements
+    // POST CONTENT
     @NotBlank(message = "Post content cannot be empty")
     @Size(max = 280, message = "Post cannot exceed 280 characters")
     @Column(nullable = false, length = 280)
     private String content;
 
+    // CREATED TIME
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    // Track the author strings
+    // AUTHOR DETAILS
     private String authorFirstName;
     private String authorLastName;
 
-    // Added: Clean relationship link to the User account entity
-    @ManyToOne(fetch = FetchType.LAZY)
+    // USER RELATIONSHIP
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
+    // LIKE COUNT
     private int likeCount = 0;
 
-    // Transient fields aren't stored in DB, but used by Thymeleaf for UI states
+    // UI ONLY FIELD
+    @Transient
+    private long dislikeCount = 0;
+
+    // UI ONLY FIELD
     @Transient
     private boolean isLikedByCurrentUser;
 
-    // Pre-persist hook to automatically set the timestamp before saving
+    // UI ONLY FIELD
+    @Transient
+    private boolean isDislikedByCurrentUser;
+
+    // UI ONLY COMMENTS
+    @Transient
+    private List<Comment> comments;
+
+    // AUTO TIME
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
     }
 
-    // --- Standard Getters and Setters ---
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getContent() { return content; }
-    public void setContent(String content) { this.content = content; }
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
-    public String getAuthorFirstName() { return authorFirstName; }
-    public void setAuthorFirstName(String authorFirstName) { this.authorFirstName = authorFirstName; }
-    public String getAuthorLastName() { return authorLastName; }
-    public void setAuthorLastName(String authorLastName) { this.authorLastName = authorLastName; }
+    // =========================
+    // GETTERS & SETTERS
+    // =========================
 
-    // Added: User property accessor methods
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
+    public Long getId() {
+        return id;
+    }
 
-    public int getLikeCount() { return likeCount; }
-    public void setLikeCount(int likeCount) { this.likeCount = likeCount; }
-    public boolean getIsLikedByCurrentUser() { return isLikedByCurrentUser; }
-    public void setIsLikedByCurrentUser(boolean likedByCurrentUser) { this.isLikedByCurrentUser = likedByCurrentUser; }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getAuthorFirstName() {
+        return authorFirstName;
+    }
+
+    public void setAuthorFirstName(String authorFirstName) {
+        this.authorFirstName = authorFirstName;
+    }
+
+    public String getAuthorLastName() {
+        return authorLastName;
+    }
+
+    public void setAuthorLastName(String authorLastName) {
+        this.authorLastName = authorLastName;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public boolean getIsLikedByCurrentUser() {
+        return isLikedByCurrentUser;
+    }
+
+    public void setIsLikedByCurrentUser(boolean likedByCurrentUser) {
+        this.isLikedByCurrentUser = likedByCurrentUser;
+    }
+    public long getDislikeCount() {
+        return dislikeCount;
+    }
+
+    public void setDislikeCount(long dislikeCount) {
+        this.dislikeCount = dislikeCount;
+    }
+
+    public boolean getIsDislikedByCurrentUser() {
+        return isDislikedByCurrentUser;
+    }
+
+    public void setIsDislikedByCurrentUser(boolean dislikedByCurrentUser) {
+        this.isDislikedByCurrentUser = dislikedByCurrentUser;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
 }
