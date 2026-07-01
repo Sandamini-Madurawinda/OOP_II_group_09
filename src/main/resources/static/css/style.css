@@ -89,10 +89,10 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-    padding: 12px;
+    padding: 13px;
     margin-bottom: 20px;
     border: 1px solid #cccccc;
-    border-radius: 4px;
+    border-radius: 10px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
     width: 100%;
@@ -108,22 +108,22 @@ input[type="password"]:focus {
 
 
 button[type="submit"] {
-    background-color: #3182CE;
-    color: white;
-    border: none;
-    padding: 12px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-    margin-bottom: 20px;
+        background: linear-gradient(135deg, #1a365d, #2d6a9f);
+        border-radius: 10px;
+        padding: 13px;
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-weight: 700;
+        box-shadow: 0 2px 6px rgba(26, 54, 93, 0.3);
+        transition: all 0.2s ease;
 }
 
 
+
 button[type="submit"]:hover {
-    background-color: #357abd;
+    background: linear-gradient(135deg, #2d6a9f, #1a365d);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(26, 54, 93, 0.35);
 }
 
 
