@@ -22,61 +22,9 @@
         </div>
     </div>
 
-</main>
 
-<!-- Unified Asynchronous Interactive Metric Handling Script -->
-<script th:inline="javascript">
-    function sendReaction(postId, isDislike) {
-    fetch(`/posts/${postId}/like?isDislike=${isDislike}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => {
-            if (!response.ok) throw new Error('Network failure');
-            return response.json();
-        })
-        .then(data => {
-            const likeBtn      = document.getElementById(`like-btn-${postId}`);
-            const dislikeBtn   = document.getElementById(`dislike-btn-${postId}`);
-            const likeCount    = document.getElementById(`like-count-${postId}`);
-            const dislikeCount = document.getElementById(`dislike-count-${postId}`);
-
-            likeCount.textContent    = data.likeCount;
-            dislikeCount.textContent = data.dislikeCount;
-
-            // Like button active state
-            if (data.liked) {
-                likeBtn.classList.add('text-pulseBlue');
-                likeBtn.classList.remove('text-slate-500');
-            } else {
-                likeBtn.classList.remove('text-pulseBlue');
-                likeBtn.classList.add('text-slate-500');
-            }
-
-            // Dislike button active state
-            if (data.disliked) {
-                dislikeBtn.classList.add('text-red-500');
-                dislikeBtn.classList.remove('text-slate-500');
-            } else {
-                dislikeBtn.classList.remove('text-red-500');
-                dislikeBtn.classList.add('text-slate-500');
-            }
-        })
-        .catch(error => {
-            console.error('Reaction error:', error);
-            alert('Could not update. Please try again.');
-        });
-    }
-
-    function toggleLike(postId)    { sendReaction(postId, false); }
-    function toggleDislike(postId) { sendReaction(postId, true);  }
-    function toggleComments(postId) {
-    const section = document.getElementById(`comment-section-${postId}`);
-    section.classList.toggle('hidden');
-}
-</script>
+    <script src="/js/feed.js"></script>
+</th:block>
 </body>
 </html>
 
