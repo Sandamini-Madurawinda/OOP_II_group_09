@@ -9,8 +9,10 @@
 <th:block th:fragment="content">
 
     <p class="feed-label">People You May Know</p>
-
     <div id="users"></div>
+
+    <p class="feed-label" style="margin-top:30px;">Your Friends</p>
+    <div id="friends"></div>
 
     <script th:inline="javascript">
         const currentUserId = [[${currentUser.id}]];
@@ -19,6 +21,9 @@
     <script src="/js/friends.js"></script>
 
     <script>
+        // =========================
+        // SUGGESTED USERS
+        // =========================
         fetch(`/friends/users?currentUserId=${currentUserId}`)
         .then(res => res.json())
         .then(users => {
@@ -34,9 +39,7 @@
                         ${user.firstName} ${user.lastName}
                     </div>
 
-                    <button
-                        class="send-request"
-                        data-id="${user.id}">
+                    <button class="send-request" data-id="${user.id}">
                         Add Friend
                     </button>
 
@@ -46,6 +49,37 @@
             document.getElementById('users').innerHTML = html;
 
             initializeFriendButtons();
+        });
+
+
+        // =========================
+        // FRIENDS LIST
+        // =========================
+        fetch(`/friends/list?userId=${currentUserId}`)
+        .then(res => res.json())
+        .then(users => {
+
+            let html = '';
+
+            users.forEach(user => {
+
+                html += `
+                <div class="user-card">
+
+                    <div class="user-name">
+                        ${user.firstName} ${user.lastName}
+                    </div>
+
+                    <button class="unfriend-btn" data-id="${user.id}">
+                        Unfriend
+                    </button>
+
+                </div>`;
+            });
+
+            document.getElementById("friends").innerHTML = html;
+
+            initializeUnfriendButtons();
         });
     </script>
 

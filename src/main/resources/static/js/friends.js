@@ -52,3 +52,23 @@ function initializeAcceptRejectButtons() {
         });
     });
 }
+
+function initializeUnfriendButtons() {
+
+    document.querySelectorAll(".unfriend-btn").forEach(btn => {
+
+        btn.addEventListener("click", function () {
+
+            const friendId = this.dataset.id;
+
+            fetch(`/friends/unfriend/${friendId}?userId=${currentUserId}`, {
+                method: "POST"
+            })
+            .then(res => res.text())
+            .then(msg => {
+                alert(msg);
+                location.reload();
+            });
+        });
+    });
+}

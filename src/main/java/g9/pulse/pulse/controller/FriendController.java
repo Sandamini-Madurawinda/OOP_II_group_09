@@ -48,4 +48,16 @@ public class FriendController {
     public List<User> getUsers(@RequestParam Long currentUserId) {
         return service.getSuggestedUsers(currentUserId);
     }
+
+    @GetMapping("/list")
+    public List<User> getFriends(@RequestParam Long userId) {
+        return service.getFriends(userId);
+    }
+
+    @PostMapping("/unfriend/{id}")
+    public String unfriend(@PathVariable Long id,
+                           @RequestParam Long userId) {
+        return service.unfriend(userId, id);
+    }
+
 }
