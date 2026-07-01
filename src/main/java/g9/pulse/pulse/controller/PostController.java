@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
 import g9.pulse.pulse.model.Like;
-
+import g9.pulse.pulse.service.FriendService;
 
 @Controller
 @RequestMapping("/posts")
@@ -24,16 +24,19 @@ public class PostController {
     private final UserRepository userRepository;
     private final LikeRepository likeRepository;
     private final CommentRepository commentRepository;
+    private final FriendService friendService;
 
     public PostController(PostRepository postRepository,
                           UserRepository userRepository,
                           LikeRepository likeRepository,
-                          CommentRepository commentRepository) {
+                          CommentRepository commentRepository,
+                          FriendService friendService) {
 
         this.postRepository = postRepository;
         this.userRepository = userRepository;
         this.likeRepository = likeRepository;
         this.commentRepository = commentRepository;
+        this.friendService = friendService;
     }
 
 //    @GetMapping("/feed")
@@ -57,9 +60,6 @@ public class PostController {
     public String showHomeFeed(Model model,
                                Authentication authentication) {
 
-        List<Post> posts =
-                postRepository.findAllByOrderByCreatedAtDesc();
-
         User currentUser = null;
 
         if (authentication != null
@@ -69,6 +69,15 @@ public class PostController {
                     .findByEmail(authentication.getName())
                     .orElse(null);
         }
+
+        final User viewerForFilter = currentUser;
+
+        List<Post> allPosts =
+                postRepository.findAllByOrderByCreatedAtDesc();
+
+        List<Post> posts = allPosts.stream()
+                .filter(post -> isVisibleToViewer(post, viewerForFilter))
+                .toList();
 
         // SET LIKE + COMMENTS
         for (Post post : posts) {
@@ -132,13 +141,40 @@ public class PostController {
         return "redirect:/posts/feed";
     }
     @GetMapping("/{id}")
-    public String viewSpecificPost(@PathVariable("id") Long id, Model model) {
+    public String viewSpecificPost(@PathVariable("id") Long id, Model model, Authentication authentication) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Post not found with id: " + id));
+
+        User currentUser = null;
+        if (authentication != null && authentication.isAuthenticated()) {
+            currentUser = userRepository.findByEmail(authentication.getName()).orElse(null);
+        }
+
+        if (!isVisibleToViewer(post, currentUser)) {
+            throw new RuntimeException("You do not have permission to view this post");
+        }
+
         model.addAttribute("post", post);
         return "home";
+    }
 
+    private boolean isVisibleToViewer(Post post, User viewer) {
+        if (post.getPrivacy() == g9.pulse.pulse.model.PostPrivacy.PUBLIC) {
+            return true;
+        }
 
+        if (viewer == null) {
+            return false;
+        }
 
+        if (post.getUser() != null && post.getUser().getId().equals(viewer.getId())) {
+            return true;
+        }
+
+        if (post.getPrivacy() == g9.pulse.pulse.model.PostPrivacy.FRIENDS_ONLY) {
+            return post.getUser() != null && friendService.areFriends(viewer.getId(), post.getUser().getId());
+        }
+
+        return false;
     }
 }
