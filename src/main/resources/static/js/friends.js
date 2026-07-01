@@ -6,8 +6,7 @@ function initializeFriendButtons() {
 
             const receiverId = this.dataset.id;
 
-            const senderId = 1; // logged user
-
+            const senderId = currentUserId;
             fetch(`/friends/request/${receiverId}?senderId=${senderId}`, {
                 method: "POST"
             })

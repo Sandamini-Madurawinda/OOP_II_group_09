@@ -45,6 +45,9 @@
     <div id="users" class="space-y-3"></div>
 
 </main>
+<script th:inline="javascript">
+    const currentUserId = [[${currentUser.id}]];
+</script>
 
 <script>
     fetch('/friends/users')
