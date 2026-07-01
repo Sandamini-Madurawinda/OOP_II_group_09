@@ -45,7 +45,7 @@ public class FriendController {
 
     // STEP 5 — GET ALL USERS (VERY SIMPLE)
     @GetMapping("/users")
-    public List<User> getUsers() {
-        return userRepo.findAll();
+    public List<User> getUsers(@RequestParam Long currentUserId) {
+        return service.getSuggestedUsers(currentUserId);
     }
 }

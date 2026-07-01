@@ -65,14 +65,38 @@ public class FriendService {
 
         FriendRequest fr = repo.findById(requestId).orElseThrow();
 
-        if (!fr.getStatus().equals("PENDING")) {
-            return "Request already processed";
-        }
-
-        fr.setStatus("REJECTED");
-        repo.save(fr);
+        repo.delete(fr);
 
         return "Friend request rejected";
+    }
+
+    public List<User> getSuggestedUsers(Long currentUserId) {
+
+        List<User> users = userRepo.findAll();
+
+        users.removeIf(user -> user.getId().equals(currentUserId));
+
+        List<FriendRequest> allRequests = repo.findAll();
+
+        users.removeIf(user ->
+
+                allRequests.stream().anyMatch(fr ->
+
+                        (
+                                fr.getSender().getId().equals(currentUserId)
+                                        && fr.getReceiver().getId().equals(user.getId())
+                        )
+
+                                ||
+
+                                (
+                                        fr.getReceiver().getId().equals(currentUserId)
+                                                && fr.getSender().getId().equals(user.getId())
+                                )
+                )
+        );
+
+        return users;
     }
 
     // GET REQUESTS

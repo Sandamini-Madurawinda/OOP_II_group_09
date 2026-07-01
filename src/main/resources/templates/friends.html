@@ -19,7 +19,7 @@
     <script src="/js/friends.js"></script>
 
     <script>
-        fetch('/friends/users')
+        fetch(`/friends/users?currentUserId=${currentUserId}`)
         .then(res => res.json())
         .then(users => {
 
