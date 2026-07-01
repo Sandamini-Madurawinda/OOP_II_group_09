@@ -23,31 +23,19 @@ public class Like {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    public Like() {
-    }
+    private boolean isDislike; // true නම් Dislike, false නම් Like
 
-    public Long getId() {
-        return id;
-    }
+    public Like() {}
 
-    public User getUser() {
-        return user;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Post getPost() {
-        return post;
-    }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Post getPost() { return post; }
+    public void setPost(Post post) { this.post = post; }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
+    public boolean isDislike() { return isDislike; }
+    public void setDislike(boolean dislike) { isDislike = dislike; }
 }
-

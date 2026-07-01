@@ -44,7 +44,7 @@ public class SecurityConfig {
 
                         .loginPage("/login")
 
-                        .defaultSuccessUrl("/home",true)
+                        .defaultSuccessUrl("/posts/feed",true)
 
                         .permitAll()
 
