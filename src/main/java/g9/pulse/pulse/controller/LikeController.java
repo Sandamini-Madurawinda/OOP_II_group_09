@@ -1,84 +1,43 @@
 package g9.pulse.pulse.controller;
 
+import g9.pulse.pulse.dto.LikeResponse;
 import g9.pulse.pulse.model.Like;
-import g9.pulse.pulse.model.Post;
 import g9.pulse.pulse.model.User;
-import g9.pulse.pulse.repository.LikeRepository;
-import g9.pulse.pulse.repository.PostRepository;
 import g9.pulse.pulse.repository.UserRepository;
-
+import g9.pulse.pulse.service.LikeService;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-        import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/posts")
 public class LikeController {
 
-    private final LikeRepository likeRepository;
-    private final PostRepository postRepository;
+    private final LikeService likeService;
     private final UserRepository userRepository;
 
-    public LikeController(LikeRepository likeRepository,
-                          PostRepository postRepository,
-                          UserRepository userRepository) {
-
-        this.likeRepository = likeRepository;
-        this.postRepository = postRepository;
+    public LikeController(LikeService likeService, UserRepository userRepository) {
+        this.likeService = likeService;
         this.userRepository = userRepository;
     }
 
     @PostMapping("/{id}/like")
-    public Map<String, Object> toggleLike(@PathVariable Long id,
-                                          Authentication authentication) {
+    public LikeResponse toggleLike(@PathVariable Long id,
+                                   @RequestParam boolean isDislike,
+                                   Authentication authentication) {
 
         String email = authentication.getName();
+        User user = userRepository.findByEmail(email).orElseThrow();
 
-        User user = userRepository.findByEmail(email)
-                .orElseThrow();
 
-        Post post = postRepository.findById(id)
-                .orElseThrow();
+        likeService.handleLikeOrDislike(id, user, isDislike);
 
-        Like existingLike = likeRepository
-                .findByUserAndPost(user, post)
-                .orElse(null);
+        long likes = likeService.getLikeCount(id);
+        long dislikes = likeService.getDislikeCount(id);
 
-        boolean liked;
+        Like current = likeService.getUserAction(user, id);
+        boolean isLikedNow = (current != null && !current.isDislike());
+        boolean isDislikedNow = (current != null && current.isDislike());
 
-        // UNLIKE
-        if (existingLike != null) {
-
-            likeRepository.delete(existingLike);
-
-            liked = false;
-
-        } else {
-
-            // LIKE
-            Like like = new Like();
-
-            like.setUser(user);
-
-            like.setPost(post);
-
-            likeRepository.save(like);
-
-            liked = true;
-        }
-
-        long likeCount = likeRepository.countByPost(post);
-
-        Map<String, Object> response = new HashMap<>();
-
-        response.put("liked", liked);
-
-        response.put("likeCount", likeCount);
-
-        return response;
+        return new LikeResponse(isLikedNow, isDislikedNow, likes, dislikes);
     }
 }
-
-
