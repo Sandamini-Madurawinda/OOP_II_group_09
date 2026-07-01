@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head></head>
+<body>
+
+<nav th:fragment="navbar" class="navbar">
+    <div class="navbar-inner">
+
+        <span class="navbar-brand">Pulse</span>
+
+        <div class="navbar-links">
+            <a th:href="@{/posts/feed}" class="active">
+                &#9741; Feed
+            </a>
+            <a th:href="@{/friends-page}">
+                &#9825; Friends
+            </a>
+            <a th:href="@{/requests-page}">
+                &#9993; Requests
+            </a>
+            <a th:href="@{/profile}">
+                &#9786; Profile
+            </a>
+            <a th:href="@{/search}">
+                &#9906; Search
+            </a>
+            <a th:href="@{/logout}" class="logout">
+                &#10562; Logout
+            </a>
+        </div>
+
+    </div>
+</nav>
+
+</body>
+</html>
