@@ -1,25 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Search Users</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div class="container search-page">
-<form th:action="@{/search}" method="get">
-    <div class="search-box-wrapper">
-        <input type="text"
-           name="keyword"
-           th:value="${keyword}"
-           placeholder=" 🔍 Search users or posts..."/>
 
-    <button type="submit">
-        Search
-    </button>
+<div class="search-topbar">
+    <div class="search-topbar-inner">
+        <span class="search-topbar-brand">Pulse</span>
     </div>
+</div>
 
-</form>
+<div class="auth-wrapper">
+    <div class="container search-page">
+        <h2>Search Users</h2>
+
+        <form th:action="@{/search}" method="get" class="search-box-wrapper">
+            <input type="text"
+                   name="keyword"
+                   th:value="${keyword}"
+                   placeholder=" 🔍 Search users or posts..."/>
+            <button type="submit" aria-label="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+            </button>
+        </form>
 
     <div class="search-results-section">
         <div class="search-section-title">👥 Users Found</div>
@@ -59,6 +70,9 @@
         <a href="/home">🏠 Home Feed</a>
     </div>
 </div>
-
+</div>
+<footer class="footer">
+    <p>&copy; 2026 Pulse. All rights reserved.</p>
+</footer>
 </body>
 </html>

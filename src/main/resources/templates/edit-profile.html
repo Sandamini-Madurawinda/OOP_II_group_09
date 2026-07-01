@@ -1,33 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      th:replace="~{layout :: layout(~{::content})}">
 <head>
     <meta charset="UTF-8">
     <title>Edit Profile</title>
-    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<div class="container">
-<h2>Edit Profile</h2>
+<th:block th:fragment="content">
 
-<form th:action="@{/profile/edit}" method="post">
+    <div class="auth-wrapper">
+        <div class="container edit-profile-page">
 
-    <label for="firstName">First Name</label>
-    <input type="text" id="firstName" name="firstName" th:value="${user.firstName}" required />
+            <h2>Edit Profile</h2>
 
-    <label for="lastName">Last Name</label>
-    <input type="text" id="lastName" name="lastName" th:value="${user.lastName}" required />
+            <form th:action="@{/profile/edit}" method="post">
 
-    <label for="bio">Bio</label>
-    <textarea id="bio" name="bio" th:text="${user.bio}" placeholder="Write something about yourself..."></textarea>
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName"
+                       th:value="${user.firstName}" required />
 
-    <button type="submit">Save Changes</button>
-    <a href="/profile" style="margin-top: 10px;">Cancel</a>
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName"
+                       th:value="${user.lastName}" required />
 
-</form>
-</div>
+                <label for="bio">Bio</label>
+                <textarea id="bio" name="bio"
+                          th:text="${user.bio}"
+                          placeholder="Write something about yourself..."></textarea>
 
-<br>
+                <button type="submit">Save Changes</button>
 
+                <a href="/profile" class="cancel-link">Cancel</a>
 
+            </form>
+
+        </div>
+    </div>
+
+</th:block>
 </body>
 </html>

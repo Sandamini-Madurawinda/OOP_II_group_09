@@ -1,51 +1,73 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      th:replace="~{layout :: layout(~{::content})}">
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
-    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+<th:block th:fragment="content">
 
-<div class="container profile-page">
-    <h2>User Profile</h2>
+    <div class="auth-wrapper">
+        <div class="container profile-page">
 
-    <div class="profile-card">
+            <h2>User Profile</h2>
 
-        <div class="profile-avatar">
-            <span>📸</span>
-        </div>
-        <h3 th:text="${user.firstName + ' ' + user.lastName}">FirstName</h3>
+            <div class="profile-card">
 
-        <p class="profile-email" th:text="${user.email}">user@email.com</p>
+                <div class="profile-avatar">
+                    <span>📸</span>
+                </div>
 
-        <p class="profile-bio" th:text="${user.bio != null && !user.bio.isEmpty() ? user.bio : 'No bio added yet.'}">
-            No bio added yet.
-        </p>
+                <h3 th:text="${user.firstName + ' ' + user.lastName}">FirstName</h3>
 
-        <div class="profile-stats-grid">
-            <div class="stat-item">
-                <div class="stat-value" th:text="${postCount}">0</div>
-                <div class="stat-label">Posts</div>
+                <p class="profile-email" th:text="${user.email}">user@email.com</p>
+
+                <p class="profile-bio"
+                   th:text="${user.bio != null && !user.bio.isEmpty() ? user.bio : 'No bio added yet.'}">
+                    No bio added yet.
+                </p>
+
+                <div class="profile-stats-grid">
+
+                    <div class="stat-item">
+                        <div class="stat-value" th:text="${postCount}">0</div>
+                        <div class="stat-label">Posts</div>
+                    </div>
+
+                    <div class="stat-item">
+                        <div class="stat-value" th:text="${friendCount}">0</div>
+                        <div class="stat-label">Friends</div>
+                    </div>
+
+                    <div class="stat-item">
+                        <div class="stat-value"
+                             th:text="${user.joinDate != null ? user.joinDate : '2026'}">2026</div>
+                        <div class="stat-label">Joined</div>
+                    </div>
+
+                </div>
+
+                <div class="actions-layout-row">
+                    <a href="/profile/edit"
+                       th:if="${loggedUser != null && loggedUser.id == user.id}">📝 Edit Profile</a>
+
+                    <a href="/home">🏠 Home Feed</a>
+
+                    <form th:action="@{/logout}" method="post"
+                          th:if="${loggedUser != null && loggedUser.id == user.id}">
+                        <button type="submit" class="logout-btn"
+                                onclick="return confirm('Are you sure you want to log out?');">
+                            🚪 Logout
+                        </button>
+                    </form>
+                </div>
+
             </div>
-            <div class="stat-item">
-                <div class="stat-value" th:text="${friendCount}">0</div>
-                <div class="stat-label">Friends</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-value" th:text="${user.joinDate != null ? user.joinDate : '2026'}">2026</div>
-                <div class="stat-label">Joined</div>
-            </div>
-        </div>
 
-        <div class="actions-layout-row">
-            <a href="/profile/edit" th:if="${loggedUser != null && loggedUser.id == user.id}">📝 Edit Profile</a>
-            <a href="/home">🏠 Home Feed</a>
-            <form th:action="@{/logout}" method="post" th:if="${loggedUser != null && loggedUser.id == user.id}">
-                <button type="submit" class="logout-btn" onclick="return confirm('Are you sure you want to log out?');">🚪 Logout</button>
-            </form>
         </div>
     </div>
-</div>
+
+</th:block>
 </body>
 </html>
